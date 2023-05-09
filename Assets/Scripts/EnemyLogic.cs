@@ -22,6 +22,7 @@ public class EnemyLogic : MonoBehaviour
     void Die()
     {
         Instantiate(explosenEffect, transform.position, Quaternion.identity);
+        GlobalEventManager.SendEnemyKilled();
         Destroy(gameObject);
     }
 

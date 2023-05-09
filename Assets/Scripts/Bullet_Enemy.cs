@@ -16,7 +16,7 @@ public class Bullet_Enemy : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		PlayerHealth playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
-		if (collision.gameObject.CompareTag("Player"))
+		if (collision.gameObject.CompareTag("Player") && playerHealth.canTakeDamage)
 		{
 			playerHealth.TakeDamage(damage);
 			Debug.Log("Shot fot Player");

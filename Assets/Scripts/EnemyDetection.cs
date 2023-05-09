@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyDetection : MonoBehaviour
 {
@@ -9,14 +10,13 @@ public class EnemyDetection : MonoBehaviour
     public LayerMask obstacleLayerMask;
     public Transform firePoint;
     private EnemyPatrol enemyPatrol;
-    private EnemyAttackDistance enemyAttackDistance;
     public Animator animator;
+    public UnityEvent attackPlayer;
     public bool rangeAttack = false;
-
+    public bool isWalk;
 	void Start()
     {
         enemyPatrol = GetComponent<EnemyPatrol>();
-        enemyAttackDistance = GetComponent<EnemyAttackDistance>();
     }
 
     
@@ -27,17 +27,17 @@ public class EnemyDetection : MonoBehaviour
         if (hit)
         {
             enemyPatrol.enabled = false;
-            animator.SetBool("isWalk", false);
-            enemyAttackDistance.Shot();
+            isWalk = false;
+            attackPlayer.Invoke();
 
         }
         else if (!hit)
         {
             enemyPatrol.enabled = true;
-            animator.SetBool("isWalk", true);
+            isWalk = true;
 		}
-
-    }
+		animator.SetBool("isWalk", isWalk);
+	}
    
    
 }

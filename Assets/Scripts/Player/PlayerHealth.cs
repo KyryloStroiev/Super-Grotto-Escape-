@@ -7,7 +7,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float health = 100.0f;
     public float damageEnemy = 10;
     public Animator animator;
-    void Start()
+    public bool canTakeDamage = true;
+	public float damageDelay = 2f;
+	void Start()
     {
         
     }
@@ -15,8 +17,8 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage( float damage)
     {
         health -= damage;
-		animator.SetBool("isDamage", true);
-        animator.SetBool("isJumping", false);
+        animator.SetTrigger("Damage");
+		StartCoroutine(TakeDamageDelay());
 		if (health < 0)
         {
             Die();
@@ -24,7 +26,16 @@ public class PlayerHealth : MonoBehaviour
     }
     void Update()
     {
-        
+        if(!canTakeDamage)
+        {
+            float alpha = Mathf.Abs(Mathf.Sin(Time.time * 10.0f));
+            GetComponent<SpriteRenderer>().color = new Color(1.0f,1.0f,1.0f,alpha);
+
+        }
+        else
+        {
+			GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+		}
     }
     void Die()
     {
@@ -33,17 +44,19 @@ public class PlayerHealth : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if( collision.gameObject.CompareTag("Enemy"))
+		if( collision.gameObject.CompareTag("Enemy") && canTakeDamage)
         {
             TakeDamage(damageEnemy);
             Debug.Log("You take damage");
-           
+            
 
         }
 	}
-
-    void  AnimatorDamage()
+    IEnumerator TakeDamageDelay()
     {
-        animator.SetBool("isDamage", false);
-    }
+        canTakeDamage = false;
+        yield return new WaitForSeconds(damageDelay);
+        canTakeDamage = true;
+		
+	}
 }

@@ -225,6 +225,11 @@ MonoBehaviour:
     m_Bits: 8
   firePoint: {fileID: 2275395695414778863}
   animator: {fileID: 2275395695406689554}
+  attackPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  rangeAttack: 0
+  isWalk: 0
 --- !u!1 &2275395695414778856
 GameObject:
   m_ObjectHideFlags: 0
