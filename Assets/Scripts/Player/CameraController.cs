@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     public CinemachineVirtualCamera _camera;
 	private CharacterController2D _characterController;
-	public float offsetY = 2.0f;
+	private float offsetY = 2.0f;
 	void Start()
     {
 		_camera = FindObjectOfType<CinemachineVirtualCamera>();

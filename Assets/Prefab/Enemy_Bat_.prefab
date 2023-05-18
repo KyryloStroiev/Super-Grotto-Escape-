@@ -152,11 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45996c2a385c61b4ba3e79dff1b8f926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolSpeed: 1.5
   startPosition: {fileID: 0}
   endPosition: {fileID: 0}
-  animator: {fileID: 8546549259790048588}
-  speed: 2
-  rotateEnemy: 0
+  rotateEnemy: 1
 --- !u!95 &8546549259790048588
 Animator:
   serializedVersion: 5

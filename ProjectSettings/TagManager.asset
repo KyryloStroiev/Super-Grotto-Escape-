@@ -8,6 +8,11 @@ TagManager:
   - Gate
   - Bullet
   - Ladder
+  - Battery
+  - Spikes
+  - ObjectDamage
+  - Heart
+  - Gun
   layers:
   - Default
   - TransparentFX
@@ -16,14 +21,14 @@ TagManager:
   - Water
   - UI
   - Ground
-  - Fireball
+  - Shot_Player
   - Enemy
   - Material
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Fireball_Enemy
+  - Ladder
+  - ObjectDamage
+  - Button
+  - Slime
   - 
   - 
   - 

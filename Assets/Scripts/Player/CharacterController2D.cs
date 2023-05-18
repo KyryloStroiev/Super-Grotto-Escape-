@@ -11,34 +11,32 @@ public class CharacterController2D : MonoBehaviour
 	
 
 
-	[SerializeField] public float moveSpeed = 5f;
+	public  float moveSpeed = 5f;
 	[SerializeField] private float jumpForce = 17f;
-	private float climpSpeed = 3f;
-	[SerializeField] private float gravityScale = 3f;
+	[SerializeField] private float climpSpeed = 3f;
+	private float gravityScale = 3f;
 	private  float horizontalInput;
 	private float verticalInput;
 /*	[Range(0, .3f)][SerializeField] private float movementSmooting = .05f;*/ // На скільки згладити рух
 
-	public  bool isGrounded;
+	internal bool isGrounded;
 	[SerializeField] private bool inFlight = false; //Зміна яка вмикається після того як гравець підстрибнув і не знаходиться на землі
 	private bool isOnLadder; // Підьйом на драбини чи інші 
-	public bool isLookingUp = false;
+	internal bool isLookingUp = false;
 	private bool beginsToRise = false; // Становиться на сходи
 	[SerializeField] private LayerMask whatIsGround; //Слой який визначає землю 
 	[SerializeField] private Transform pointGroundCheck; //Точка з якої роблять коло яке оприділяє слой землі
 	const float groundedRadius = .2f; // Радіус кола для зіткнення з землею
 	private Vector3 m_velosity = Vector3.zero;
-	public bool isFacingRight = true;
-
+	internal bool isFacingRight = true;
+	internal bool isCrouch = false;
 	private Rigidbody2D rb;
 	private Animator animator;
-	//[SerializeField] private Collider2D slidingDisableCollider; //Колайдер який вимикається коли гравець сковзить
+	[SerializeField] private Collider2D crouchDisableCollider; //Колайдер який вимикається коли гравець сковзить
 	private void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-
-		
 	}
 
 	private void Update()
@@ -60,6 +58,7 @@ public class CharacterController2D : MonoBehaviour
 		}
 		animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
 		animator.SetBool("Jump", inFlight);
+		
 	}
 	private void FixedUpdate()
 	{
@@ -116,10 +115,14 @@ public class CharacterController2D : MonoBehaviour
 				beginsToRise = true;
 			}
 		}
-		
 		else if (verticalInput > 0 && !inFlight)
 		{
 			isLookingUp = true;
+		}
+		else if (verticalInput < 0 && isGrounded)
+		{
+			crouchDisableCollider.enabled = false;
+			isCrouch = true;
 		}
 		else
 		{
@@ -127,8 +130,10 @@ public class CharacterController2D : MonoBehaviour
 			
 			rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
 			isLookingUp = false;
+			isCrouch = false;
 		}
 		animator.SetBool("isLookingUp", isLookingUp);
+		animator.SetBool("Crouch", isCrouch);
 		animator.SetBool("isOnLadder", beginsToRise);
 		animator.SetFloat("ClimpUp", Mathf.Abs(verticalInput));
 	}

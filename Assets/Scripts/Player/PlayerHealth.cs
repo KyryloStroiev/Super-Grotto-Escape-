@@ -5,16 +5,19 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float health = 100.0f;
+    private float maxHealth;
     public float damageEnemy = 10;
-    public Animator animator;
-    public bool canTakeDamage = true;
-	public float damageDelay = 2f;
-	void Start()
-    {
-        
-    }
+    public float heart = 10;
+    private Animator animator;
+    internal bool canTakeDamage = true;
+	private float damageDelay = 2f;
+	private void Start()
+	{
+        maxHealth = health;
+		animator = GetComponent<Animator>();
+	}
 
-    public void TakeDamage( float damage)
+	public void TakeDamage( float damage)
     {
         health -= damage;
         animator.SetTrigger("Damage");
@@ -23,7 +26,10 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
-    }
+        else if (health >= maxHealth)
+			health = maxHealth;
+
+	}
     void Update()
     {
         if(!canTakeDamage)
@@ -42,14 +48,25 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Game Over");
     }
 
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if(collision.gameObject.CompareTag("ObjectDamage"))
+        {
+			TakeDamage(damageEnemy);
+		}
+        if(collision.gameObject.CompareTag("Heart"))
+        {
+           
+                TakeDamage(-heart);
+          
+            Destroy(collision.gameObject);
+        }
+	}
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if( collision.gameObject.CompareTag("Enemy") && canTakeDamage)
+		if( collision.gameObject.CompareTag("Enemy")  && canTakeDamage)
         {
             TakeDamage(damageEnemy);
-            Debug.Log("You take damage");
-            
-
         }
 	}
     IEnumerator TakeDamageDelay()

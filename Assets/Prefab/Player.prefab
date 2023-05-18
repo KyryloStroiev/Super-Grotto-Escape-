@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slideSpeed: 13
+  slideCooldown: 2
   slideCollider: {fileID: 3532056237615392016}
 --- !u!114 &1969354992
 MonoBehaviour:

@@ -37,6 +37,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2275395695414778863}
+  - {fileID: 3524933037637493074}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -188,8 +189,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPoints: {fileID: 2275395695414778863}
   bulletPrefab: {fileID: 2867416456915004546, guid: 56792bfedf635444ba725ef442c067bd, type: 3}
-  animator: {fileID: 2275395695406689554}
-  attackDelay: 1
 --- !u!114 &2275395695406689558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,10 +201,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45996c2a385c61b4ba3e79dff1b8f926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolSpeed: 1.8
   startPosition: {fileID: 0}
   endPosition: {fileID: 0}
-  animator: {fileID: 2275395695406689554}
-  speed: 1
   rotateEnemy: 1
 --- !u!114 &2275395695406689557
 MonoBehaviour:
@@ -219,17 +217,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8ae17e25deab94c9e9e75abbf18278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 8.6
+  forward: 9.2
+  back: 5.71
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  firePoint: {fileID: 2275395695414778863}
-  animator: {fileID: 2275395695406689554}
-  attackPlayer:
+  firePointForward: {fileID: 2275395695414778863}
+  firePointBack: {fileID: 3524933037637493074}
+  attackorFollowingPlayer:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2275395695406689559}
+        m_TargetAssemblyTypeName: EnemyAttackDistance, Assembly-CSharp
+        m_MethodName: Shot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  stopFollowingPlayer:
     m_PersistentCalls:
       m_Calls: []
-  rangeAttack: 0
-  isWalk: 0
 --- !u!1 &2275395695414778856
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,9 +252,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2275395695414778863}
   m_Layer: 8
-  m_Name: FirePoint
+  m_Name: "FirePoint\u0430Forward"
   m_TagString: Untagged
-  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -260,4 +272,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2275395695406689552}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3558246823937898496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3524933037637493074}
+  m_Layer: 8
+  m_Name: "FirePoint\u0430Back"
+  m_TagString: Untagged
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3524933037637493074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558246823937898496}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.06, y: -0.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2275395695406689552}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

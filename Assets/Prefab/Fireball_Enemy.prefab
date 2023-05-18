@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3494115126756070505}
   - component: {fileID: 9220902827614482246}
   - component: {fileID: -6972522298460969692}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Fireball_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2867416456915004546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62, y: 1.11, z: 0.20487042}
+  m_LocalPosition: {x: -23.96, y: -0.88, z: 0.20487042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -158,7 +158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58719bcc96a843488b8d4b345a9c57a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 9220902827614482246}
   bulletEffect: {fileID: 2294532640918017519, guid: 70f0d16a3ec8edd4495a7668df9c4a85, type: 3}
   damage: 2
   speed: 5

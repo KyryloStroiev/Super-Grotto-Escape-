@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7076166550667676077}
   - component: {fileID: 8797409552270425629}
   - component: {fileID: 8414435771045214932}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shot
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -158,7 +158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86862c8d0b9265841be51a4c946b75aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 8797409552270425629}
   bulletEffect: {fileID: 2294532640918017519, guid: 70f0d16a3ec8edd4495a7668df9c4a85, type: 3}
   damage: 40
   speed: 20

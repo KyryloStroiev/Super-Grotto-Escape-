@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerSlide : MonoBehaviour
 {
-    public float slideSpeed = 25f;
+    [SerializeField] private float slideSpeed = 25f;
 	private bool isSliding = false;
-	public float slideCooldown = 0.5f;
+	private float slideCooldown = 0.5f;
 	private float slideTime = 0.2f;
 	private CharacterController2D characterController;
 

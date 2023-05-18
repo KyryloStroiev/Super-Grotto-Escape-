@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
-	public Animator animator;
+	private Animator animator;
 	private int pressedButton = 0;
 	public int pressedButtonToOpen;
-
+	public GameObject indicator;
+	public Sprite IndicatorOpen;
+	private SpriteRenderer indicatorSpriteRenderer;
 	private void Start()
 	{
-		
+		indicatorSpriteRenderer = indicator.GetComponent<SpriteRenderer>();
 		animator = GetComponent<Animator>();
 	}
 
@@ -28,11 +30,12 @@ public class Gate : MonoBehaviour
 		if (pressedButton >= pressedButtonToOpen)
 		{
 			GateOpen();
+		
 		}
 	}
 	public void GateOpen()
 	{
-
 		animator.SetBool("GateOpen", true);
+		indicatorSpriteRenderer.sprite = IndicatorOpen;
 	}
 }

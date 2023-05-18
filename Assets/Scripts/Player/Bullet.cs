@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
 	public GameObject bulletEffect;
-	public float damage = 40;
+	[SerializeField] private float damage = 40;
     [SerializeField] private float speed = 40;
 	private Vector2 playerOrientation;
 	private EnemyLogic enemyLogic;
 	void Start()
     {
-		
+		rb = GetComponent<Rigidbody2D>();
 		playerOrientation = FindObjectOfType<PlayerShot>().transform.right;
 		rb.velocity = transform.TransformDirection(playerOrientation) * speed;
         if(playerOrientation.x <0)
