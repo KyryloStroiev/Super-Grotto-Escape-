@@ -30,7 +30,11 @@ public class PlayerHealth : MonoBehaviour
 			health = maxHealth;
 
 	}
-    void Update()
+	void Doctor()
+    {
+        health += heart;
+    }
+	void Update()
     {
         if(!canTakeDamage)
         {
@@ -56,9 +60,7 @@ public class PlayerHealth : MonoBehaviour
 		}
         if(collision.gameObject.CompareTag("Heart"))
         {
-           
-                TakeDamage(-heart);
-          
+            Doctor();
             Destroy(collision.gameObject);
         }
 	}

@@ -119,7 +119,7 @@ public class CharacterController2D : MonoBehaviour
 		{
 			isLookingUp = true;
 		}
-		else if (verticalInput < 0 && isGrounded)
+		else if (verticalInput < 0 && !inFlight)
 		{
 			crouchDisableCollider.enabled = false;
 			isCrouch = true;
