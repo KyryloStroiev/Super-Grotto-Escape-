@@ -5,18 +5,19 @@ using UnityEngine;
 public class PlayerSlide : MonoBehaviour
 {
     [SerializeField] private float slideSpeed = 25f;
-	private bool isSliding = false;
-	private float slideCooldown = 0.5f;
 	private float slideTime = 0.2f;
-	private CharacterController2D characterController;
 
+	private bool isSliding = false;
+	
     private Rigidbody2D rb;
     private Animator animator;
-    public Collider2D slideCollider; // Колайдер який прибираємо при підкаті
 
+	private CharacterController2D characterController;
+	private CheckAndFlipDirection checkAndFlip;
 	private void Awake()
 	{
 		characterController = GetComponent<CharacterController2D>();
+		checkAndFlip = GetComponent<CheckAndFlipDirection>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
@@ -27,7 +28,6 @@ public class PlayerSlide : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.LeftShift) && !isSliding && characterController.isGrounded)
 		{
 			StartCoroutine(PrefromSlide());
-			
 		}
 			
 		animator.SetBool("isSlide", isSliding);
@@ -36,21 +36,23 @@ public class PlayerSlide : MonoBehaviour
 	IEnumerator PrefromSlide()
 	{
 		isSliding = true;
-		Vector2 slideDirection = characterController.isFacingRight ? Vector2.right : Vector2.left; // отримуємо напрямок підкату
-		 // тривалість підкату (в секундах)
+		Vector2 slideDirection = checkAndFlip.isFacingRight ? Vector2.right : Vector2.left;
 		float t = 0f;
 		float initialSpeed = characterController.moveSpeed;
-		slideCollider.enabled = false;
 		characterController.moveSpeed = slideSpeed;
+
 		while (t < slideTime)
 		{
 			t += Time.deltaTime;
-			
 			yield return null;
 		}
+
+		yield return new WaitForSeconds(slideTime);
+
 		characterController.moveSpeed = initialSpeed;
-		slideCollider.enabled = true;
-	    isSliding = false;
+		isSliding = false;
+
+
 	}
 
 	

@@ -21,20 +21,21 @@ public class PressurePlatform: MonoBehaviour
         animator.SetBool("isPress", isPress);
     }
 
-	private void OnCollisionEnter2D(Collision2D collision)
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		isPress = true;
-        pressCoroutine = StartCoroutine(InvokePress(interdalShot));
+		pressCoroutine = StartCoroutine(InvokePress(interdalShot));
 	}
-	private void OnCollisionExit2D(Collision2D collision)
+
+	private void OnTriggerExit2D(Collider2D collision)
 	{
 		isPress = false;
-        if(pressCoroutine != null)
-        {
-            StopCoroutine(pressCoroutine);
-        }
+		if (pressCoroutine != null)
+		{
+			StopCoroutine(pressCoroutine);
+		}
 	}
-    IEnumerator InvokePress(float interval)
+	IEnumerator InvokePress(float interval)
     {
         while (true)
         {

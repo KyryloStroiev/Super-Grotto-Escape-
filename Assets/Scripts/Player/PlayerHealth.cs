@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private float health = 100.0f;
-    private float maxHealth;
+    public  float health = 100.0f;
     public float damageEnemy = 10;
     public float heart = 10;
-    private Animator animator;
+	private float maxHealth;
+	private Animator animator;
     internal bool canTakeDamage = true;
 	private float damageDelay = 2f;
+    private GameManager gameManager;
 	private void Start()
 	{
+        gameManager = FindObjectOfType<GameManager>();
         maxHealth = health;
 		animator = GetComponent<Animator>();
 	}
@@ -22,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
         health -= damage;
         animator.SetTrigger("Damage");
 		StartCoroutine(TakeDamageDelay());
+        //gameManager.
 		if (health < 0)
         {
             Die();
@@ -33,6 +36,10 @@ public class PlayerHealth : MonoBehaviour
 	void Doctor()
     {
         health += heart;
+        if(health > maxHealth)
+        {
+            health = maxHealth;
+        }
     }
 	void Update()
     {
@@ -58,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
         {
 			TakeDamage(damageEnemy);
 		}
-        if(collision.gameObject.CompareTag("Heart"))
+        else if(collision.gameObject.CompareTag("Heart") && health < maxHealth)
         {
             Doctor();
             Destroy(collision.gameObject);
