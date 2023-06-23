@@ -1,47 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using Zenject;
 
 public class Bullet : MonoBehaviour
 {
-    private Rigidbody2D rb;
-	public GameObject bulletEffect;
 	[SerializeField] private float damage = 40;
     [SerializeField] private float speed = 40;
+
+	private const string Bullets = "Bullet";
+	private const string BulletEffect = "BulletEffect";
 	private Vector2 playerOrientation;
+
+	private CharacterController2D characterController;
 	private EnemyLogic enemyLogic;
-	void Start()
+	private Rigidbody2D rb;
+
+	[Inject]
+	private void Construct(CharacterController2D characterController, EnemyLogic enemyLogic)
+	{
+		this.enemyLogic = enemyLogic;
+		this.characterController = characterController;
+	}
+	private void OnEnable()
     {
-		rb = GetComponent<Rigidbody2D>();
-		playerOrientation = FindObjectOfType<PlayerShot>().transform.right;
-		rb.velocity = transform.TransformDirection(playerOrientation) * speed;
-        if(playerOrientation.x <0)
-        {
-            transform.localScale = new Vector3(-1,1,1);
-        }
-        else
-        {
-            transform.localScale = new Vector3(1,1,1);
-        }
-    }
+		SetupBullet();
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		EnemyLogic enemy = collision.gameObject.GetComponent<EnemyLogic>();
+		if (enemy !=null)
+			enemy.TakeDamage(damage);
 
-		if (collision.gameObject.CompareTag("Enemy"))
-		{
-			EnemyLogic enemyLogic = collision.gameObject.GetComponent<EnemyLogic>();
-			if (enemyLogic != null)
-			{
-				enemyLogic.TakeDamage(damage);
-			}
-		}
-
-		Instantiate(bulletEffect, transform.position, Quaternion.identity);
-		Destroy(gameObject);
+		ObjectPooler.Instance.ReturnToPool(Bullets, gameObject);
+		ObjectPooler.Instance.SpawnFromPool(BulletEffect, transform.position, Quaternion.identity);
 	}
 
-	
+	private void SetupBullet()
+	{
+		rb = GetComponent<Rigidbody2D>();
+		playerOrientation = characterController.transform.right;
+		rb.velocity = transform.TransformDirection(playerOrientation) * speed;
+		if (playerOrientation.x < 0)
+		{
+			transform.localScale = new Vector3(-1, 1, 1);
+		}
+		else
+		{
+			transform.localScale = new Vector3(1, 1, 1);
+		}
+	}
    
 
 }

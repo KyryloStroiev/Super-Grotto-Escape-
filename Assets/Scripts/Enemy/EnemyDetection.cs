@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,9 +8,9 @@ public class EnemyDetection : MonoBehaviour
     [Range(1,50)] [SerializeField] private float forward;
 	[Range(1, 20)][SerializeField] private float back;
     [Space]
-	public LayerMask obstacleLayerMask;
-    public Transform firePointForward;
-    public Transform firePointBack;
+	[SerializeField] private LayerMask obstacleLayerMask;
+	[SerializeField] private Transform firePointForward;
+	[SerializeField] private Transform firePointBack;
     private EnemyPatrol enemyPatrol;
     private Animator animator;
     public UnityEvent attackorFollowingPlayer;

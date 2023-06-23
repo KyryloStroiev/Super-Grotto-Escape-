@@ -1,19 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using Zenject;
 
 public class EnemyAttackMeele : MonoBehaviour
 {
-    private Transform player;
-    public float speedEnemy = 1.0f;
-    public float damage = 10.0f;
-    private bool isFollowing = false;
+    [SerializeField] private float speedEnemy = 1.0f;
+	[SerializeField] private float damage = 10.0f;
+	[SerializeField] private float distanceAttack = 3.0f;
+
+	private bool isFollowing = false;
     private bool isAttacking = false;
     private Animator animator;
-    public float distanceAttack = 3.0f;
+    private PlayerHealth player;
+
+    [Inject]
+    private void Contract(PlayerHealth player )
+    {
+        this.player = player;
+    }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform; 
         animator = GetComponent<Animator>();
     }
 
@@ -29,8 +36,8 @@ public class EnemyAttackMeele : MonoBehaviour
     {
         if(player != null && isFollowing)
         {
-            Vector3 direction = player.position - transform.position;
-            float distance = direction.magnitude;
+            Vector3 direction = player.transform.position - transform.position;
+            float distance = direction.sqrMagnitude;
             if(distance <= distanceAttack) 
             {
                isFollowing = false;
@@ -52,7 +59,8 @@ public class EnemyAttackMeele : MonoBehaviour
 
     private void AttackPlayer()
     {
-		PlayerHealth playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
-        playerHealth.TakeDamage(damage);
+        player.TakeDamage(damage);  
 	}
+
+   
 }

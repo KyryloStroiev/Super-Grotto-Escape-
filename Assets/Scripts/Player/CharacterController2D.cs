@@ -1,11 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor.Tilemaps;
-using UnityEditorInternal;
+﻿
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -14,21 +8,16 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private float climpSpeed = 3f;
 	private float gravityScale = 3f;
 	internal Vector2 moveDirection;
-	private const float groundedRadius = .2f; 
+	private const float groundedRadius = .2f;
 
-	internal bool isCrouch = false;
-	internal bool isGrounded;
-	internal bool inFlight = false; 
-	internal bool isOnLadder; 
-	internal bool isLookingUp = false;
-	internal bool isClimbing = false;
+	[HideInInspector]
+	public bool isCrouch, isGrounded, inFlight, isOnLadder, isLookingUp, isClimbing;
 
 	[SerializeField] private Collider2D crouchDisableCollider;
 	[SerializeField] private LayerMask whatIsGround; 
 	[SerializeField] private Transform pointGroundCheck; 
 
 	private Rigidbody2D rb;
-
 	private PlayerInput input;
 
 	private void Awake()
@@ -123,15 +112,7 @@ public class CharacterController2D : MonoBehaviour
 
 	private void CheckGround()
 	{
-		isGrounded = false;
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(pointGroundCheck.position, groundedRadius, whatIsGround);
-		for (int i = 0; i < colliders.Length; i++)
-		{
-			if (colliders[i].gameObject != gameObject)
-			{
-				isGrounded = true;
-			}
-		}
+		isGrounded = Physics2D.OverlapCircle(pointGroundCheck.position, groundedRadius, whatIsGround);
 	}
 	private void CheckFlight()
 	{
@@ -154,7 +135,7 @@ public class CharacterController2D : MonoBehaviour
 
 	private void SetLadderState(Collider2D other, bool isOnLadder)
 	{
-		if (other.gameObject.CompareTag("Ladder"))
+		if (other.CompareTag("Ladder"))
 		{
 			this.isOnLadder = isOnLadder;
 		}

@@ -1,36 +1,27 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSlide : MonoBehaviour
 {
     [SerializeField] private float slideSpeed = 25f;
 	private float slideTime = 0.2f;
-
-	private bool isSliding = false;
-	
+	[HideInInspector] public bool isSliding = false;
     private Rigidbody2D rb;
-    private Animator animator;
-
 	private CharacterController2D characterController;
 	private CheckAndFlipDirection checkAndFlip;
+	private PlayerInput input;
 	private void Awake()
 	{
+		input = new PlayerInput();
 		characterController = GetComponent<CharacterController2D>();
 		checkAndFlip = GetComponent<CheckAndFlipDirection>();
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-
+		input.Player.Slide.performed += _ => Slide();
 	}
 
-	private void Update()
+	private void Slide()
 	{
-		if (Input.GetKeyDown(KeyCode.LeftShift) && !isSliding && characterController.isGrounded)
-		{
-			StartCoroutine(PrefromSlide());
-		}
-			
-		animator.SetBool("isSlide", isSliding);
+		StartCoroutine(PrefromSlide());
 	}
 
 	IEnumerator PrefromSlide()
@@ -51,9 +42,15 @@ public class PlayerSlide : MonoBehaviour
 
 		characterController.moveSpeed = initialSpeed;
 		isSliding = false;
-
-
 	}
 
-	
+	private void OnEnable()
+	{
+		input.Enable();
+	}
+	private void OnDisable()
+	{
+		input.Disable();
+	}
+
 }

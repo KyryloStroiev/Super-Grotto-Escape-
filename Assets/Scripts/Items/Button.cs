@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Button : MonoBehaviour
 {
     private Animator animator;
-	public UnityEvent pressButton;
-	public UnityEvent releaseButton;
+	[SerializeField] private UnityEvent pressButton;
+	[SerializeField] private UnityEvent releaseButton;
 	private bool isTriggered = false;
 	private void Start()
 	{
-		animator = GetComponent<Animator>();
-		
+		animator = GetComponent<Animator>();	
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)

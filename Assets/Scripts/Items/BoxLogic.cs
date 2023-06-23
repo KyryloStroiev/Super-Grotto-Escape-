@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class BoxLogic : MonoBehaviour
 {
 	private SpriteChange spriteChange;
 	
-
 	private void Start()
 	{
 		spriteChange = GetComponent<SpriteChange>();

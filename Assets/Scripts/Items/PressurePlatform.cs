@@ -1,15 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PressurePlatform: MonoBehaviour
 {
     private Animator animator;
-    public UnityEvent Shot;
+    [SerializeField] private UnityEvent Shot;
     private bool isPress = false;
     private Coroutine pressCoroutine;
-    public float interdalShot = 2f;
+    [SerializeField] private float interdalShot = 2f;
     void Start()
     {
         animator = GetComponent<Animator>();

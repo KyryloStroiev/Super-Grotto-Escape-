@@ -1,11 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using Zenject;
 
 public class PlatformLogic : MonoBehaviour
 {
     private Animator animator;
+	private PlayerHealth playerHealth;
 
+	[Inject]
+	private void Construct(PlayerHealth playerHealth)
+	{
+		this.playerHealth = playerHealth;
+	}
 	private void Start()
 	{
 		animator = GetComponent<Animator>();
@@ -13,7 +19,8 @@ public class PlatformLogic : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag("Player"))
+		PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+		if (player !=null)
 		{
 			animator.SetTrigger("Destroy");
 		}

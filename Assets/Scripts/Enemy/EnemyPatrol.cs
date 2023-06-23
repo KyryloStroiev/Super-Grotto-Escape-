@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
-	public float patrolSpeed = 3f;
+	[SerializeField] private float patrolSpeed = 3f;
     [Space]
-	public Transform startPosition;
-    public Transform endPosition;
-    public bool rotateEnemy;
+	[SerializeField] private Transform startPosition;
+	[SerializeField] private Transform endPosition;
+	[SerializeField] private bool rotateEnemy;
 	private Animator animator;
 	private void Awake()
 	{

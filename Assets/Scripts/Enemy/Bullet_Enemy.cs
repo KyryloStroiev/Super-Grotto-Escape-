@@ -1,31 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Bullet_Enemy : MonoBehaviour
 {
-    private Rigidbody2D rb;
-	public GameObject bulletEffect;
 	[SerializeField] float damage = 2;
     [SerializeField] private float speed = 40;
-	void Start()
-    {
-		rb = GetComponent<Rigidbody2D>();
-		rb.velocity = transform.right * speed;
-	}
 
+	private const string Fireball = "Fireball";
+	private const string BulletEffect = "BulletEffect";
+	private PlayerHealth playerHealth;
+	private EnemyLogic enemyLogic;
+	private Rigidbody2D rb;
+	private Vector2 playerOrientation;
+
+	[Inject]
+	public void Construct(PlayerHealth playerHealth, EnemyLogic enemyLogic)
+	{
+		this.playerHealth = playerHealth;
+		this.enemyLogic = enemyLogic;
+	}
+	private void OnEnable()
+	{
+		SetupBullet();
+	}
+	
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		PlayerHealth playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
-		if (collision.gameObject.CompareTag("Player") && playerHealth.canTakeDamage)
+		PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+
+		if (player != null)
 		{
-			playerHealth.TakeDamage(damage);
+			player.TakeDamage(damage);
+
 		}
-		Instantiate(bulletEffect, transform.position, Quaternion.identity);
-		Destroy(gameObject);
+		ObjectPooler.Instance.ReturnToPool(Fireball, gameObject);
+		ObjectPooler.Instance.SpawnFromPool(BulletEffect, transform.position, Quaternion.identity);
 	}
 
-
-
+	private void SetupBullet()
+	{
+		rb = GetComponent<Rigidbody2D>();
+		playerOrientation = enemyLogic.transform.right;
+		rb.velocity = transform.TransformDirection(playerOrientation) * speed;
+		if (playerOrientation.x < 0)
+		{
+			transform.localScale = new Vector3(-1, 1, 1);
+		}
+		else
+		{
+			transform.localScale = new Vector3(1, 1, 1);
+		}
+	}
 
 }

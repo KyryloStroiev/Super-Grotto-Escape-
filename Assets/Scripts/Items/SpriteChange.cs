@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class SpriteChange : MonoBehaviour
 {
-    public Sprite[] sprites;
+	public GameObject explosenEffect;
+	[SerializeField] private Sprite[] sprites;
     private int currentSpriteIndex = 0;
     private SpriteRenderer spriteRenderer;
-	public GameObject explosenEffect;
+	private const string ExplosionSmall = "ExplosionSmall";
 	void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -22,8 +22,8 @@ public class SpriteChange : MonoBehaviour
 
 		if (currentSpriteIndex == sprites.Length - 1)
 		{
-			Instantiate(explosenEffect, transform.position, Quaternion.identity);
-			Destroy(gameObject);
+			ObjectPooler.Instance.SpawnFromPool("ExplosionSmall", transform.position, Quaternion.identity);
+			gameObject.SetActive(false);
 		}
 	}
   

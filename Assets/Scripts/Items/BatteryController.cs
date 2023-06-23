@@ -1,21 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using static UnityEditor.Progress;
+using Zenject;
 
 public class BatteryController : MonoBehaviour
 {
     [SerializeField] private int batteryId;
-    private bool collected;
-	private GameManager gameManager;
 
+	private const string BatteryCollected = "BatteryCollected";
+
+	private bool collected;
+	private GameManager gameManager;
+	private PlayerHealth playerHealth;
+
+	[Inject]
+	public void Contract(GameManager gameManager, PlayerHealth playerHealth)
+	{
+		this.gameManager = gameManager;
+		this.playerHealth = playerHealth;
+	}
 	private void Start()
 	{
-		gameManager = FindObjectOfType<GameManager>();
-		if (PlayerPrefs.HasKey("BatteryCollected" + batteryId))
+		if (PlayerPrefs.HasKey(BatteryCollected + batteryId))
 		{
 			collected = true;
-			Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 		else
 		{
@@ -25,7 +33,8 @@ public class BatteryController : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag("Player") && !collected)
+		PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+		if (player !=null && !collected)
 		{
 			CollectItem();
 		}
@@ -33,10 +42,10 @@ public class BatteryController : MonoBehaviour
 
 	private void CollectItem()
 	{
-		Debug.Log("ASDAS");
-		gameManager.CollectedBattery();
-		PlayerPrefs.SetInt("BatteryCollected" + batteryId, 1);
+		
+		PlayerPrefs.SetInt(BatteryCollected + batteryId, 1);
 		collected = true;
 		gameObject.SetActive(false);
+		gameManager.CollectedBattery();
 	}
 }

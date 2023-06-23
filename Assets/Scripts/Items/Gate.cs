@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
 	private Animator animator;
 	private int pressedButton = 0;
-	public int pressedButtonToOpen;
-	public GameObject indicator;
-	public Sprite IndicatorOpen;
+	[SerializeField] private int pressedButtonToOpen;
+	[SerializeField] private GameObject indicator;
+	[SerializeField] private  Sprite IndicatorOpen;
 	private SpriteRenderer indicatorSpriteRenderer;
 	private void Start()
 	{

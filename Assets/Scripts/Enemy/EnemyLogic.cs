@@ -1,23 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
+using Zenject;
 
 public class EnemyLogic : MonoBehaviour
 {
-    
-    public float health;
-    public GameObject explosenEffect;
+	[SerializeField] private float touchDamage = 11f;
+	[SerializeField] private float health;
     [SerializeField] private int points;
 
-    private GameManager gameManager;
+	private const string ExplosionSmall = "ExplosionSmall";
 
-	private void Awake()
+	private GameManager gameManager;
+    private PlayerHealth player;
+
+	[Inject]
+	public void Construct(GameManager gameManager, PlayerHealth player)
 	{
-		gameManager = FindObjectOfType<GameManager>();
+		this.gameManager = gameManager;
+        this.player = player;
 	}
-
 	public void TakeDamage(float damage)
     {
 
@@ -25,15 +25,27 @@ public class EnemyLogic : MonoBehaviour
         if (health <= 0)
         {
             gameManager.Scoring(points);
-            Die();
+			Die();
+           
         }
     }
 
-    void Die()
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		PlayerHealth players = collision.gameObject.GetComponent<PlayerHealth>();
+
+		if (players != null && player.canTakeDamage)
+		{
+			player.TakeDamage(touchDamage);
+		}
+	}
+
+	void Die()
     {
-        Instantiate(explosenEffect, transform.position, Quaternion.identity);
+		
+		ObjectPooler.Instance.SpawnFromPool(ExplosionSmall, transform.position, Quaternion.identity);
         Destroy(gameObject);
-    }
+	}
 
 
 }

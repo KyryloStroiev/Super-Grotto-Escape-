@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class EnemyAttackRange : MonoBehaviour
 {
-	public Transform shotPoints;
-	public GameObject bulletPrefab;
+	[SerializeField] private Transform shotPoints;
 	private Animator animator;
 
 	private void Awake()
@@ -19,7 +17,7 @@ public class EnemyAttackRange : MonoBehaviour
 
 	public void ShotBullet()
 	{
-		Instantiate(bulletPrefab, shotPoints.position, shotPoints.rotation);
+		ObjectPooler.Instance.SpawnFromPool("Fireball", shotPoints.position, Quaternion.identity);
 		animator.SetBool("isShot", false);
 	}
 }

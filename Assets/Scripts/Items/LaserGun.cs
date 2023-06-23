@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LaserGun : MonoBehaviour
 {
     private Animator animator;
-	public GameObject laserPrefab;
+	[SerializeField] private GameObject laserPrefab;
 	private bool isLaserActive = false;
 	private void Start()
 	{

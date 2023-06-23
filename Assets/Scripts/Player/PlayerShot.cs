@@ -1,36 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using Zenject;
 
 public class PlayerShot : MonoBehaviour
 {
 	private const float bulletOffset = 0.3f;
+	private const string ShotSound = "ShotSound";
+	private const string Bullet = "Bullet";
 
 	[SerializeField] private Transform shotPoints;
-	[SerializeField] private Object bulletPrefab;
-
-	private Animator animator;
+	private AudioManager audioManager;
+	private PlayerAnimator playerAnimator;
 	private CharacterController2D characterController;
 	private PlayerInput input;
+	
+	
 
+	[Inject]
+	private void Construct(AudioManager audioManager)
+	{
+		this.audioManager = audioManager;
+	}
 	private void Awake()
 	{
 		input = new PlayerInput();
-		animator = GetComponent<Animator>();
+		playerAnimator = GetComponent<PlayerAnimator>();
 		characterController = GetComponent<CharacterController2D>();
 		input.Player.Shoot.performed += _ => Shoot();
 	}
 
 	void Shoot()	
 	{
-		if(characterController.isCrouch) 
+		
+		if (characterController.isCrouch) 
 		{
-			animator.SetTrigger("ShootInCrouch");
+			playerAnimator.ShootInCrouch();
 		}
 		else
 		{
-			animator.SetTrigger("Shoot");
+			playerAnimator.Shoot();
 		}
+		audioManager.Play(ShotSound);
 	}
 
 	void ShootBull()
@@ -40,7 +50,7 @@ public class PlayerShot : MonoBehaviour
 		{
 			bulletPosition -= shotPoints.up * bulletOffset;
 		}
-		Instantiate(bulletPrefab, bulletPosition, Quaternion.identity);
+		ObjectPooler.Instance.SpawnFromPool(Bullet, bulletPosition, Quaternion.identity);
 
 	}
 
