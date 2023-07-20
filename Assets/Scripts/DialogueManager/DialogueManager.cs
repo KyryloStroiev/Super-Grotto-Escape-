@@ -10,13 +10,13 @@ public class DialogueManager : MonoBehaviour
 
 	private Queue<string> sentences;
 	[SerializeField] private Animator animator;
-	private CharacterController2D characterController;
+	private PlayerMovement playerMovement;
 	private bool isDialogueActive;
 
 	private void Start()
 	{
 		sentences = new Queue<string>();
-		characterController = FindObjectOfType<CharacterController2D>();
+		playerMovement = FindObjectOfType<PlayerMovement>();
 	}
 
 	private void Update()
@@ -42,8 +42,8 @@ public class DialogueManager : MonoBehaviour
 		}
 		DisplayNextSentence();
 
-		characterController.enabled = false;
-		Animator playerAnimator = characterController.GetComponent<Animator>();
+		playerMovement.enabled = false;
+		Animator playerAnimator = playerMovement.GetComponent<Animator>();
 		playerAnimator.speed = 0f;
 	}
 
@@ -75,8 +75,8 @@ public class DialogueManager : MonoBehaviour
 	{
 		animator.SetBool("isOpen", false);
 		isDialogueActive = false;
-		characterController.enabled = true;
-		Animator playerAnimator = characterController.GetComponent<Animator>();
+		playerMovement.enabled = true;
+		Animator playerAnimator = playerMovement.GetComponent<Animator>();
 		playerAnimator.speed = 1f;
 	}
 }

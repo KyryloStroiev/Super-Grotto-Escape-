@@ -10,13 +10,13 @@ public class BatteryController : MonoBehaviour
 
 	private bool collected;
 	private GameManager gameManager;
-	private PlayerHealth playerHealth;
+	private PlayerMovement player;
 
 	[Inject]
-	public void Contract(GameManager gameManager, PlayerHealth playerHealth)
+	public void Contract(GameManager gameManager, PlayerMovement player)
 	{
 		this.gameManager = gameManager;
-		this.playerHealth = playerHealth;
+		this.player = player;
 	}
 	private void Start()
 	{
@@ -33,8 +33,8 @@ public class BatteryController : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
-		if (player !=null && !collected)
+		
+		if (player.gameObject !=null && !collected)
 		{
 			CollectItem();
 		}

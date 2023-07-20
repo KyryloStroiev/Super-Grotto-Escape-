@@ -7,6 +7,7 @@ public class SceneUnstaller : MonoInstaller
 	[SerializeField] private Transform spawnPlayerPoint;
 	public override void InstallBindings()
 	{
+		
 		BindGameManager();
 		BindAudioManager();
 		BindPlayer();
@@ -15,20 +16,19 @@ public class SceneUnstaller : MonoInstaller
 
 	private void BindPlayer()
 	{
-		PlayerHealth player = Container
-			.InstantiatePrefabForComponent<PlayerHealth>
-			(playerPrefab, spawnPlayerPoint.position, Quaternion.identity, null);
+		PlayerMovement playerMovement = Container
+	   .InstantiatePrefabForComponent<PlayerMovement>(playerPrefab, spawnPlayerPoint.position, Quaternion.identity, null);
 
-		CharacterController2D characterController = player.GetComponent<CharacterController2D> ();
+		Container
+			.Bind<PlayerMovement>()
+			.FromInstance(playerMovement)
+			.AsSingle();
 
+		PlayerHealth playerHealth = playerMovement.GetComponent<PlayerHealth>();
 		Container
 			.Bind<PlayerHealth>()
-			.FromInstance(player)
-			.AsSingle();
-		Container
-			.Bind<CharacterController2D>()
-			.FromInstance(characterController)
-			.AsSingle();
+			.FromInstance(playerHealth)
+			.AsTransient();
 	}
 
 	private void BindGameManager()
@@ -56,4 +56,5 @@ public class SceneUnstaller : MonoInstaller
 			.AsSingle()
 			.NonLazy();
 	}
+
 }

@@ -42,9 +42,9 @@ public class ObjectPooler : MonoBehaviour
 
 			for (int i = 0; i < pool.size; i++)
 			{
-				GameObject obj = container.InstantiatePrefab(pool.prefab); ///при використані zenject створюємо об'єкт через container
-				obj.SetActive(false);
+				GameObject obj = container.InstantiatePrefab(pool.prefab); 
 				objectPool.Enqueue(obj);
+				obj.SetActive(false);
 			}
 
 			poolDictionary.Add(pool.tag, objectPool);

@@ -2,15 +2,24 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 public class ColliderfromNextLevel : MonoBehaviour
 {
 	public string levelScene;
 	[SerializeField] private Image background;
 	private bool isNextLevel=false;
+
+	private PlayerMovement playerMovement;
+
+	[Inject]
+	private void Construct(PlayerMovement playerMovement)
+	{
+		this.playerMovement = playerMovement;
+	}
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(collision.gameObject.CompareTag("Player"))
+		if (playerMovement.gameObject == collision.gameObject)
 		{
 			isNextLevel = true;
 		}

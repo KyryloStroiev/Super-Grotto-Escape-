@@ -1,48 +1,58 @@
+using System;
 using System.Collections;
+using System.ComponentModel.Design;
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public  float health = 100.0f;
-	[HideInInspector] public float maxHealth;
+	
+	public float MaxHealth;
     [HideInInspector] public bool canTakeDamage = true;
-	private float damageDelay = 2f;
+	private float damageDelay = 1.5f;
+	private float _health;
+	public  event Action<float> OnHealthChange;/// 
+	public event Action GameOver;
+
 	private SpriteRenderer spriteRenderer;
     private PlayerAnimator playerAnimator;
-
-    private void Start()
+	public float Health
 	{
-		maxHealth = health;
+		get { return _health; }
+		set
+		{
+			_health = Mathf.Clamp(value, 0, MaxHealth);
+			if(_health <= 0 )
+			{
+				_health = 0;
+				GameOver?.Invoke();
+			}
+		}
+	}
+
+	
+    private void Start()
+	{	
+		Health = MaxHealth;
 		playerAnimator = GetComponent<PlayerAnimator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
 	public void TakeDamage( float damage)
     {
-        health -= damage;
-        playerAnimator.TakeDamage();
+
+		playerAnimator.TakeDamage();
 		StartCoroutine(TakeDamageDelay());
-		if (health < 0)
-        {
-            Die();
-        }
-        else if (health >= maxHealth)
-			health = maxHealth;
+		Debug.Log("DaMAGE");
+		Health -= damage;
+		OnHealthChange?.Invoke(Health);
 	}
 
-	public void Doctor(float healing)
+	public void Heal(float healing)
     {
-        health += healing;
-        if(health > maxHealth)
-        {
-            health = maxHealth;
-        }
+        Health += healing;
     }
-	private void Die()
-	{
-		Debug.Log("Game Over");
-	}
 
 	IEnumerator TakeDamageDelay()
 	{

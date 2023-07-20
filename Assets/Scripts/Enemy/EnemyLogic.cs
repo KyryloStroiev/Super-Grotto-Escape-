@@ -10,15 +10,17 @@ public class EnemyLogic : MonoBehaviour
 	private const string ExplosionSmall = "ExplosionSmall";
 
 	private GameManager gameManager;
-    private PlayerHealth player;
-
+	private PlayerHealth playerHealth;
 	[Inject]
-	public void Construct(GameManager gameManager, PlayerHealth player)
+	public void Construct(GameManager gameManager, PlayerHealth playerHealth)
 	{
+		this.playerHealth = playerHealth;
 		this.gameManager = gameManager;
-        this.player = player;
 	}
-	public void TakeDamage(float damage)
+	private void Awake()
+	{
+	}
+	public void Damage(float damage)
     {
 
         health -= damage;
@@ -32,11 +34,10 @@ public class EnemyLogic : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		PlayerHealth players = collision.gameObject.GetComponent<PlayerHealth>();
 
-		if (players != null && player.canTakeDamage)
+		if (playerHealth.gameObject == collision.gameObject)
 		{
-			player.TakeDamage(touchDamage);
+			playerHealth.TakeDamage(touchDamage);
 		}
 	}
 
@@ -46,6 +47,9 @@ public class EnemyLogic : MonoBehaviour
 		ObjectPooler.Instance.SpawnFromPool(ExplosionSmall, transform.position, Quaternion.identity);
         Destroy(gameObject);
 	}
-
+	public Vector3 GetPosition()
+	{
+		return transform.position;
+	}
 
 }

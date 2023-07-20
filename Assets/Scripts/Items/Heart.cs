@@ -6,23 +6,20 @@ using Zenject;
 public class Heart : MonoBehaviour
 {
     [SerializeField] private float healing = 25.0f;
-
-	private PlayerHealth playerHeart;
-
+	private PlayerHealth playerHealth;
 	[Inject]
-	public void Construct(PlayerHealth playerHeart)
+	private void Construct(PlayerHealth playerHealth)
 	{
-		this.playerHeart = playerHeart;
+		this.playerHealth = playerHealth;
 	}
-
+	private void Awake()
+	{
+	}
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
-		if (player != null && playerHeart.health < playerHeart.maxHealth)
-		{
-			player.Doctor(healing);
-			gameObject.SetActive(false);
-		}
+		playerHealth.Heal(healing);
+		gameObject.SetActive(false);
+
 	}
 
 }

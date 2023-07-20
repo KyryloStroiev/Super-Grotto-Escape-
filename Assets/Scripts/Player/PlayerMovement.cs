@@ -1,7 +1,8 @@
 ﻿
 using UnityEngine;
+using Zenject;
 
-public class CharacterController2D : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
 	public  float moveSpeed = 5f;
 	[SerializeField] private float jumpForce = 17f;
@@ -9,6 +10,8 @@ public class CharacterController2D : MonoBehaviour
 	private float gravityScale = 3f;
 	internal Vector2 moveDirection;
 	private const float groundedRadius = .2f;
+	private const string JumpSound = "JumpPlayer";
+	private const string LandingSound = "LandingPlayer";
 
 	[HideInInspector]
 	public bool isCrouch, isGrounded, inFlight, isOnLadder, isLookingUp, isClimbing;
@@ -19,7 +22,13 @@ public class CharacterController2D : MonoBehaviour
 
 	private Rigidbody2D rb;
 	private PlayerInput input;
+	private AudioManager audioManager;
 
+	[Inject]
+	private void Construct(AudioManager audioManager)
+	{
+		this.audioManager = audioManager;
+	}
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
@@ -62,6 +71,7 @@ public class CharacterController2D : MonoBehaviour
 		if (isGrounded)
 		{
 			rb.velocity = new Vector2(0, jumpForce);
+			audioManager.Play(JumpSound);
 		}
 	}
 
@@ -140,6 +150,13 @@ public class CharacterController2D : MonoBehaviour
 			this.isOnLadder = isOnLadder;
 		}
 	}
+
+	
+	public void JumpSounds()
+	{
+		audioManager.Play(JumpSound);
+	}
+	
 
 	private void OnEnable()
 	{

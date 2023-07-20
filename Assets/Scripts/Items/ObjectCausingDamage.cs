@@ -5,23 +5,21 @@ using Zenject;
 
 public class ObjectCausingDamage : MonoBehaviour
 {
-    [SerializeField] private float damage = 8.5f;
+    [SerializeField] private float damage = 8f;
+	private PlayerHealth playerHealth;
 
-    private PlayerHealth playerHealth;
+	[Inject]
+	private void Construct(PlayerHealth playerHealth)
+	{
+		this.playerHealth = playerHealth;
+	}
 
-    [Inject]
-    private void Construct(PlayerHealth playerHealth)
-    {
-        this.playerHealth = playerHealth;
-    }
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
-
-        if (player != null)
-        {
-            player.TakeDamage(damage);
-        }
+		if(playerHealth.gameObject == collision.gameObject)
+		{
+			playerHealth.TakeDamage(damage);
+		}
 	}
 }

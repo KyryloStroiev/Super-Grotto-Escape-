@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -10,16 +11,19 @@ public class Bullet : MonoBehaviour
 	private const string Bullets = "Bullet";
 	private const string BulletEffect = "BulletEffect";
 	private Vector2 playerOrientation;
+	private const string Fireball = "Fireball";
 
-	private CharacterController2D characterController;
+	private PlayerMovement playerMovement;
 	private EnemyLogic enemyLogic;
 	private Rigidbody2D rb;
 
+	public event Action<float> DamageHandler;
+
 	[Inject]
-	private void Construct(CharacterController2D characterController, EnemyLogic enemyLogic)
+	private void Construct(PlayerMovement playerMovement, EnemyLogic enemyLogic )
 	{
 		this.enemyLogic = enemyLogic;
-		this.characterController = characterController;
+		this.playerMovement = playerMovement;
 	}
 	private void OnEnable()
     {
@@ -28,9 +32,8 @@ public class Bullet : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		EnemyLogic enemy = collision.gameObject.GetComponent<EnemyLogic>();
-		if (enemy !=null)
-			enemy.TakeDamage(damage);
+		if (enemyLogic.gameObject == collision.gameObject)
+			enemyLogic.Damage(damage);
 
 		ObjectPooler.Instance.ReturnToPool(Bullets, gameObject);
 		ObjectPooler.Instance.SpawnFromPool(BulletEffect, transform.position, Quaternion.identity);
@@ -39,7 +42,7 @@ public class Bullet : MonoBehaviour
 	private void SetupBullet()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		playerOrientation = characterController.transform.right;
+		playerOrientation = playerMovement.transform.right;
 		rb.velocity = transform.TransformDirection(playerOrientation) * speed;
 		if (playerOrientation.x < 0)
 		{
@@ -49,6 +52,7 @@ public class Bullet : MonoBehaviour
 		{
 			transform.localScale = new Vector3(1, 1, 1);
 		}
+		
 	}
    
 

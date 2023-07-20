@@ -18,46 +18,45 @@ public class GameManager : MonoBehaviour
     private const string healthKey = "HealthKey";
     private const string scoreKey = "ScoreKey";
     private const string timeKey = "TimeKey";
-    private PlayerHealth playerHealth;
     private EnemyLogic enemyLogic;
+    private PlayerHealth playerHealth;
+
     [Inject]
-    public void Contract(PlayerHealth playerHealth)
+    private void Construct(PlayerHealth playerHealth)
     {
         this.playerHealth = playerHealth;
     }
     void Start()
     {
-        
-        LoadGameProgress();
+		LoadGameProgress();
+        playerHealth.OnHealthChange += (health) =>
+        healthPlayer.text = health + "/100";
     }
 
     void Update()
     {
-        float elepsedTime = Time.time - startTime;
-        timeGame = FormatTime(elepsedTime);
-        battery.text = "X " + batteryCollect + "/4";
-        gameTime.text = timeGame;
-        healthPlayer.text = playerHealth.health + "/100";
-        score.text = "Score: " + scoring;
-    }
+       ElapsedTime();
+	}
 
     public void CollectedBattery()
     {
         batteryCollect++;
-        SaveGameProgress();
+		battery.text = "X " + batteryCollect + "/4";
+		SaveGameProgress();
     }
 
     public void Scoring(int points)
     {
-        scoring += points;
-        SaveGameProgress();
+		
+		scoring += points;
+		score.text = "Score: " + scoring;
+		SaveGameProgress();
     }
-
 
 	public void SaveGameProgress()
     {
         PlayerPrefs.SetInt(batteryCollectKey, batteryCollect);
-        PlayerPrefs.SetInt(healthKey, (int)playerHealth.health);
+        PlayerPrefs.SetInt(healthKey, (int)playerHealth.Health);
         PlayerPrefs.SetString(timeKey, timeGame);
         PlayerPrefs.SetInt(scoreKey, scoring);
         PlayerPrefs.Save();
@@ -74,17 +73,24 @@ public class GameManager : MonoBehaviour
             batteryCollect = 0;
         }
 
-        if(PlayerPrefs.HasKey(healthKey))
-			playerHealth.health = PlayerPrefs.GetInt(healthKey);
+        if (PlayerPrefs.HasKey(healthKey))
+            playerHealth.Health = PlayerPrefs.GetInt(healthKey);
 
-        if(PlayerPrefs.HasKey(timeKey))
+        if (PlayerPrefs.HasKey(timeKey))
             timeGame = PlayerPrefs.GetString(timeKey);
 
         if (PlayerPrefs.HasKey(scoreKey))
             scoring = PlayerPrefs.GetInt(scoreKey);
 	}
     
-    private string FormatTime(float time)
+
+    private void ElapsedTime()
+    {
+		float elepsedTime = Time.time - startTime;
+		timeGame = FormatTime(elepsedTime);
+		gameTime.text = timeGame;
+	}
+	private string FormatTime(float time)
     {
         int hours = (int)time / 3600;
         int minutes = ((int)time % 3600)/60;
@@ -94,5 +100,9 @@ public class GameManager : MonoBehaviour
         return formattedTime;
     }
 
-   
+	//private void OnDisable()
+	//{
+	//	playerHealth.OnHealthChange -= (health) =>
+	//   healthPlayer.text = health + "/100";
+	//}
 }

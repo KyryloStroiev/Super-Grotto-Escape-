@@ -1,19 +1,29 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class PlayerSlide : MonoBehaviour
 {
     [SerializeField] private float slideSpeed = 25f;
 	private float slideTime = 0.2f;
+	private const string SlidingSound = "SlidingPlayer";
 	[HideInInspector] public bool isSliding = false;
+
     private Rigidbody2D rb;
-	private CharacterController2D characterController;
+	private PlayerMovement playerMovement;
 	private CheckAndFlipDirection checkAndFlip;
+	private AudioManager audioManager;
 	private PlayerInput input;
+
+	[Inject]
+	private void Construct(AudioManager audioManager)
+	{
+		this.audioManager = audioManager;
+	}
 	private void Awake()
 	{
 		input = new PlayerInput();
-		characterController = GetComponent<CharacterController2D>();
+		playerMovement = GetComponent<PlayerMovement>();
 		checkAndFlip = GetComponent<CheckAndFlipDirection>();
         rb = GetComponent<Rigidbody2D>();
 		input.Player.Slide.performed += _ => Slide();
@@ -21,16 +31,21 @@ public class PlayerSlide : MonoBehaviour
 
 	private void Slide()
 	{
-		StartCoroutine(PrefromSlide());
+		if(playerMovement.isGrounded)
+		{
+			audioManager.Play(SlidingSound);
+			StartCoroutine(PrefromSlide());
+		}
 	}
 
 	IEnumerator PrefromSlide()
 	{
+		
 		isSliding = true;
 		Vector2 slideDirection = checkAndFlip.isFacingRight ? Vector2.right : Vector2.left;
 		float t = 0f;
-		float initialSpeed = characterController.moveSpeed;
-		characterController.moveSpeed = slideSpeed;
+		float initialSpeed = playerMovement.moveSpeed;
+		playerMovement.moveSpeed = slideSpeed;
 
 		while (t < slideTime)
 		{
@@ -40,7 +55,7 @@ public class PlayerSlide : MonoBehaviour
 
 		yield return new WaitForSeconds(slideTime);
 
-		characterController.moveSpeed = initialSpeed;
+		playerMovement	.moveSpeed = initialSpeed;
 		isSliding = false;
 	}
 

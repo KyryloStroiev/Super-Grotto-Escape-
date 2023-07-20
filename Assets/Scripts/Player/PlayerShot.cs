@@ -11,7 +11,7 @@ public class PlayerShot : MonoBehaviour
 	[SerializeField] private Transform shotPoints;
 	private AudioManager audioManager;
 	private PlayerAnimator playerAnimator;
-	private CharacterController2D characterController;
+	private PlayerMovement playerMovement;
 	private PlayerInput input;
 	
 	
@@ -25,14 +25,14 @@ public class PlayerShot : MonoBehaviour
 	{
 		input = new PlayerInput();
 		playerAnimator = GetComponent<PlayerAnimator>();
-		characterController = GetComponent<CharacterController2D>();
+		playerMovement = GetComponent<PlayerMovement>();
 		input.Player.Shoot.performed += _ => Shoot();
 	}
 
 	void Shoot()	
 	{
 		
-		if (characterController.isCrouch) 
+		if (playerMovement.isCrouch) 
 		{
 			playerAnimator.ShootInCrouch();
 		}
@@ -46,7 +46,7 @@ public class PlayerShot : MonoBehaviour
 	void ShootBull()
 	{
 		Vector3 bulletPosition = shotPoints.position;
-		if(characterController.isCrouch)
+		if(playerMovement.isCrouch)
 		{
 			bulletPosition -= shotPoints.up * bulletOffset;
 		}

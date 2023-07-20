@@ -339,9 +339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08abe85c749f68f409947c77c8b0614c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  damageEnemy: 10
-  heart: 10
+  MaxHealth: 100
+  canTakeDamage: 1
 --- !u!114 &1969354984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slideSpeed: 13
+  isSliding: 0
 --- !u!114 &6713071806699446407
 MonoBehaviour:
   m_ObjectHideFlags: 0

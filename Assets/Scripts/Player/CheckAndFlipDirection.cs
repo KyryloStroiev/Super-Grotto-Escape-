@@ -5,19 +5,19 @@ public class CheckAndFlipDirection : MonoBehaviour
 {
 	[HideInInspector] public bool isFacingRight = true;
 
-	private CharacterController2D characterController;
+	private PlayerMovement playerMovement;
 
 	private void Awake()
 	{
-		characterController = GetComponent<CharacterController2D>();
+		playerMovement = GetComponent<PlayerMovement>();
 	}
 	void Update()
     {
-		if (characterController.moveDirection.x > 0 && !isFacingRight)
+		if (playerMovement.moveDirection.x > 0 && !isFacingRight)
 		{
 			FlipDirection();
 		}
-		else if (characterController.moveDirection.x < 0 && isFacingRight)
+		else if (playerMovement.moveDirection.x < 0 && isFacingRight)
 		{
 			FlipDirection();
 		}

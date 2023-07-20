@@ -4,13 +4,13 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     private Animator animator;
-    private CharacterController2D controller;
+    private PlayerMovement controller;
     private PlayerSlide playerSlide;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        controller = GetComponent<CharacterController2D>();
+        controller = GetComponent<PlayerMovement>();
         playerSlide = GetComponent<PlayerSlide>();
 
     }

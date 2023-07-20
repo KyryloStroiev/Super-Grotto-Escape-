@@ -19,8 +19,8 @@ public class PlatformLogic : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
-		if (player !=null)
+		
+		if (playerHealth.gameObject == collision.gameObject)
 		{
 			animator.SetTrigger("Destroy");
 		}
