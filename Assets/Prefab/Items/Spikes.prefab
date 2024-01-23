@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 332384297338976592}
   - component: {fileID: 332384297338976593}
   - component: {fileID: 332384297338976594}
-  - component: {fileID: 2582726966160730123}
-  - component: {fileID: 7789617958777503169}
   m_Layer: 12
   m_Name: Spikes
   m_TagString: ObjectDamage
@@ -28,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332384297338976595}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -32.43, y: 6.22, z: -0.12586398}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &332384297338976592
 SpriteRenderer:
@@ -154,29 +152,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8125, y: 0.25}
   m_EdgeRadius: 0
---- !u!114 &2582726966160730123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 332384297338976595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd1479f415ceb6b449d6aa08c4679bf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delayTime: 1
---- !u!114 &7789617958777503169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 332384297338976595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0502cafd04e3e2e49adb394f178bef53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 8.5

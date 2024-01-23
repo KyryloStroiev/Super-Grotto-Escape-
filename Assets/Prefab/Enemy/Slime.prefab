@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 1827845604787684159}
   - component: {fileID: 1827845604787684158}
   - component: {fileID: 1827845604787684157}
-  - component: {fileID: 1827845604787684147}
-  - component: {fileID: 5814825566919173781}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Enemy
@@ -30,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827845604787684156}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 12.07, y: 6.55, z: 0.30846834}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &1827845604787684145
 SpriteRenderer:
@@ -228,34 +226,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1827845604787684147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1827845604787684156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45996c2a385c61b4ba3e79dff1b8f926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolSpeed: 1.3
-  startPosition: {fileID: 0}
-  endPosition: {fileID: 0}
-  rotateEnemy: 1
---- !u!114 &5814825566919173781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1827845604787684156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1de9a5ec48926ab43b2937844271b31b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 80
-  explosenEffect: {fileID: 6610025337091394087, guid: fbac696077873ea46ba1a1787c40c7f8, type: 3}
-  points: 5

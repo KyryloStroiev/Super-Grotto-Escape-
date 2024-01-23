@@ -13,10 +13,6 @@ GameObject:
   - component: {fileID: 2275395695406689554}
   - component: {fileID: 2275395695406689581}
   - component: {fileID: 2275395695406689582}
-  - component: {fileID: 2275395695406689555}
-  - component: {fileID: 2275395695406689559}
-  - component: {fileID: 2275395695406689558}
-  - component: {fileID: 2275395695406689557}
   m_Layer: 8
   m_Name: Enemy_Lizard
   m_TagString: Enemy
@@ -31,6 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2275395695406689576}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.28, y: 1.24, z: 0.15491018}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -39,7 +36,6 @@ Transform:
   - {fileID: 2275395695414778863}
   - {fileID: 3524933037637493074}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2275395695406689553
 SpriteRenderer:
@@ -186,88 +182,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.301373, y: 1.3749129}
   m_EdgeRadius: 0
---- !u!114 &2275395695406689555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2275395695406689576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1de9a5ec48926ab43b2937844271b31b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 160
-  explosenEffect: {fileID: 6610025337091394087, guid: fbac696077873ea46ba1a1787c40c7f8, type: 3}
-  points: 10
---- !u!114 &2275395695406689559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2275395695406689576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f61cb57aeeacdc0498a7ec3bf0e37669, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shotPoints: {fileID: 2275395695414778863}
-  bulletPrefab: {fileID: 2867416456915004546, guid: 56792bfedf635444ba725ef442c067bd, type: 3}
---- !u!114 &2275395695406689558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2275395695406689576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45996c2a385c61b4ba3e79dff1b8f926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolSpeed: 1.8
-  startPosition: {fileID: 0}
-  endPosition: {fileID: 0}
-  rotateEnemy: 1
---- !u!114 &2275395695406689557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2275395695406689576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8ae17e25deab94c9e9e75abbf18278, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forward: 9.2
-  back: 5.71
-  obstacleLayerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  firePointForward: {fileID: 2275395695414778863}
-  firePointBack: {fileID: 3524933037637493074}
-  attackorFollowingPlayer:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2275395695406689559}
-        m_TargetAssemblyTypeName: EnemyAttackDistance, Assembly-CSharp
-        m_MethodName: Shot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  stopFollowingPlayer:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &2275395695414778856
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,13 +205,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2275395695414778856}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.24, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2275395695406689552}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3558246823937898496
 GameObject:
@@ -322,11 +236,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3558246823937898496}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.06, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2275395695406689552}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

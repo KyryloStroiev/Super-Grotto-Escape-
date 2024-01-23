@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1470302811}
   - component: {fileID: 1470302812}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470302810}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11.98, y: 8.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4029640175706137532}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1470302812
 SpriteRenderer:
@@ -96,8 +96,7 @@ GameObject:
   - component: {fileID: 1769359489643959954}
   - component: {fileID: 200501750314583585}
   - component: {fileID: 8972935284049680733}
-  - component: {fileID: 7407212723919167244}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +110,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4156133775723073846}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: -2.138846, z: 0.04245135}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -118,7 +118,6 @@ Transform:
   m_Children:
   - {fileID: 1470302811}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1769359489643959954
 SpriteRenderer:
@@ -203,6 +202,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -219,18 +237,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 3.9504178}
   m_EdgeRadius: 0
---- !u!114 &7407212723919167244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4156133775723073846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e41ff71e37314419ba5bbbb78b4e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pressedButtonToOpen: 2
-  indicator: {fileID: 1470302810}
-  IndicatorOpen: {fileID: 1333680369, guid: 9e9cdcae41e3fe94386e1c17ba3970e9, type: 3}
