@@ -9,17 +9,19 @@ namespace CodeBase.Infrastructure.Service.StaticDataService
 {
     public class StaticDataService : IStaticDataService
     {
+        private const string StaticdataLevels = "StaticData/Levels";
+        private const string StaticdataMonsters = "StaticData/Monsters";
         private Dictionary<MonsterTypeId,MonsterStaticData> _monsters;
         private Dictionary<string, LevelStaticData> _levels;
 
         public void Load()
         {
             _monsters = Resources
-                .LoadAll<MonsterStaticData>("StaticData/Monsters")
+                .LoadAll<MonsterStaticData>(StaticdataMonsters)
                 .ToDictionary(x => x.MonsterTypeId, x => x);
 
             _levels = Resources
-                .LoadAll<LevelStaticData>("StaticData/Levels/Level_1")
+                .LoadAll<LevelStaticData>(StaticdataLevels)
                 .ToDictionary(x => x.LevelKey, x => x);
         }
 

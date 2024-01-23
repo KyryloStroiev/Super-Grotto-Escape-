@@ -22,7 +22,9 @@ public class GameInstaller : MonoInstaller
     }
 
     private void GameStateMachineBind() => 
-        Container.Bind<GameStateMachine>().AsSingle();
+        Container.Bind<IGameStateMachine>()
+            .To<GameStateMachine>()
+            .AsSingle();
     
  
 

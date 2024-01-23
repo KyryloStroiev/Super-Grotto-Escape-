@@ -14,6 +14,10 @@ namespace Editor
         {
             Gizmos.color = EnemyColor(spawner.MonsterTypeId);
             Gizmos.DrawSphere(spawner.transform.position, 0.5f);
+
+            Handles.Label(spawner.transform.position + Vector3.up * 0.7f + Vector3.left * 0.5f, 
+                spawner.MonsterTypeId.ToString());
+
         }
 
         private static Color EnemyColor(MonsterTypeId typeId)

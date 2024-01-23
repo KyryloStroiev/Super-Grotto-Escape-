@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b3848e892ae4e25877ee8ce2a769acb, type: 3}
-  m_Name: Level_1
+  m_Name: Level_2
   m_EditorClassIdentifier: 
-  LevelKey: Level_1
+  LevelKey: Level_2
   EnemySpawners:
-  - Id: Level_1_249e810d-975f-482a-bae2-e491fbafd699
+  - Id: _d1428e2b-98d8-4b92-b136-b3e961ff9bed
     MonsterTypeId: 0
-    Position: {x: -7.59, y: -6.94, z: 0}
-  InitialHeroPosition: {x: -11.47, y: 3.02, z: -0.33370686}
+    Position: {x: -13.872551, y: -6.26831, z: 0}
+  InitialHeroPosition: {x: 6.68, y: -6.78, z: -0.33370686}

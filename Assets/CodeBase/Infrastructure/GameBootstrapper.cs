@@ -11,10 +11,10 @@ namespace CodeBase.Infrastructure
         public LoadingCurtain CurtainPrefab;
         
         private Game _game;
-        private GameStateMachine _stateMachine;
+        private IGameStateMachine _stateMachine;
 
         [Inject]
-        public void Construct(GameStateMachine stateMachine) => 
+        public void Construct(IGameStateMachine stateMachine) => 
             _stateMachine = stateMachine;
 
         private void Awake()
