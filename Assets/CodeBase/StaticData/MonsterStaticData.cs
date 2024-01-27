@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
 
 namespace CodeBase.StaticData
@@ -31,6 +32,6 @@ namespace CodeBase.StaticData
         [Range(0.1f, 5)]
         public float DistanceBack = 0.2f;
         
-        public GameObject EnemyPrefab;
+        public AssetReferenceGameObject PrefabReferenc;
     }
 }

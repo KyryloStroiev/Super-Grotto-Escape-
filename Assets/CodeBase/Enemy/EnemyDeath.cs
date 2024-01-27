@@ -9,7 +9,7 @@ namespace CodeBase.Enemy
         
         public GameObject ExplossionSmall;
         
-        public event Action Happened;
+        public event Action Died;
 
         private EnemyHealth _health;
 
@@ -29,7 +29,7 @@ namespace CodeBase.Enemy
         private void Die()
         {
             Instantiate(ExplossionSmall, transform.position, Quaternion.identity);
-            Happened?.Invoke();
+            Died?.Invoke();
             Destroy(gameObject);
         }
 

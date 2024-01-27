@@ -33,17 +33,16 @@ namespace CodeBase.Player
         
         private Rigidbody2D _rigidbody;
         
-        public void Construct(IInputService input) => 
-            _input = input;
-
-        private void Start()
+        public void Construct(IInputService input)
         {
+            _input = input;
             _colliderChecking = GetComponent<ColliderChecking>();
             _rigidbody = GetComponent<Rigidbody2D>();
             _gravityHandler = new GravityHandler(_colliderChecking);
             _runPlayer = new RunPlayer(_colliderChecking);
             _input.Jump += Jump;
         }
+        
 
         private void Update()
         {
@@ -93,7 +92,7 @@ namespace CodeBase.Player
         private static string CurrentLevel() => 
             SceneManager.GetActiveScene().name;
 
-        private void OnDisable() => 
+        private void OnDestroy() => 
             _input.Jump -= Jump;
     }
 }

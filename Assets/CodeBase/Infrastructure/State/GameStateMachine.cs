@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Service;
 using CodeBase.Infrastructure.Service.SaveLoad;
@@ -18,21 +19,23 @@ namespace CodeBase.Infrastructure.State
         private IPersistentProgressService _persistentProgressService;
         private ISaveLoadService _saveLoadService;
         private IStaticDataService _staticDataService;
+        private IAssetProvider _assetProvider;
 
         [Inject]
-        public GameStateMachine(IGameFactory gameFactory, IPersistentProgressService persistentProgressService, ISaveLoadService saveLoadService, IStaticDataService staticDataService)
+        public GameStateMachine(IGameFactory gameFactory, IPersistentProgressService persistentProgressService, ISaveLoadService saveLoadService, IStaticDataService staticDataService, IAssetProvider assetProvider)
         {
             _gameFactory = gameFactory;
             _persistentProgressService = persistentProgressService;
             _saveLoadService = saveLoadService;
             _staticDataService = staticDataService;
+            _assetProvider = assetProvider;
         }
 
         public void CreateAllState(SceneLoader sceneLoader, LoadingCurtain curtain)
         {
             _states = new Dictionary<Type, IExitableState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, _staticDataService),
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, _staticDataService, _assetProvider),
                 [typeof(LoadProgressState)] = new LoadProgressState(this, _persistentProgressService, _saveLoadService),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, _gameFactory, _persistentProgressService, _staticDataService),
                 [typeof(GameLoopState)] = new GameLoopState(this),

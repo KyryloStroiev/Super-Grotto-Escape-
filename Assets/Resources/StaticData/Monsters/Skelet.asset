@@ -20,4 +20,8 @@ MonoBehaviour:
   MinDistanceToAttack: 1.2
   DistanceForward: 7
   DistanceBack: 2
-  EnemyPrefab: {fileID: 5513243730343310168, guid: b95699c8f046e38419115e02426e994f, type: 3}
+  PrefabReferenc:
+    m_AssetGUID: b95699c8f046e38419115e02426e994f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

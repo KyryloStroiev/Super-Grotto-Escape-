@@ -21,6 +21,16 @@ namespace CodeBase.Zenject
             StaticDataServiceBind();
         }
 
+        /*
+        private void EnemyFactoryBind()
+        {
+            Container
+                .Bind<IEnemyFactory>()
+                .To<EnemyFactory>()
+                .AsSingle();
+        }
+        */
+
         private void StaticDataServiceBind()
         {
             Container

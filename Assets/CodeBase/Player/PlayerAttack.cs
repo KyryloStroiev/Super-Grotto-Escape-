@@ -24,15 +24,10 @@ namespace CodeBase.Player
         public void Construct(IInputService inputService)
         {
             _inputService = inputService;
-        }
-
-        private void Start()
-        {
             _inputService.Shoot += StartAttack;
             _flip = GetComponent<FlipDirectionPlayer>();
             _animator = GetComponent<PlayerAnimator>();
         }
-
         private void StartAttack() => 
             _animator.PlayAttack();
 
