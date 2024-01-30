@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Level_2
   EnemySpawners:
-  - Id: _d1428e2b-98d8-4b92-b136-b3e961ff9bed
+  - Id: _0c7e2d53-d396-419b-b341-b11e98c8ec1b
     MonsterTypeId: 0
     Position: {x: -13.872551, y: -6.26831, z: 0}
+    StartPoint: {x: -17.24255, y: -6.26831, z: 0}
+    EndPoint: {x: -11.492551, y: -6.26831, z: 0}
   InitialHeroPosition: {x: 6.68, y: -6.78, z: -0.33370686}

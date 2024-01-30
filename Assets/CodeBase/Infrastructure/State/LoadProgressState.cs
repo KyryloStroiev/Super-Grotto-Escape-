@@ -3,6 +3,7 @@ using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Service;
 using CodeBase.Infrastructure.Service.SaveLoad;
+using CodeBase.StaticData;
 
 namespace CodeBase.Infrastructure.State
 {
@@ -38,10 +39,8 @@ namespace CodeBase.Infrastructure.State
 
         private PlayerProgress NewProgress()
         {
-          PlayerProgress progress = new PlayerProgress(initialLevel: "Level_1");
-
-          progress.PlayerState.MaxHP = 8f;
-          progress.PlayerStats.Damage = 5f;
+          PlayerProgress progress = new PlayerProgress(initialLevel: LevelId.Level_1.ToString());
+          
           progress.PlayerState.ResetHP();
 
           return progress;

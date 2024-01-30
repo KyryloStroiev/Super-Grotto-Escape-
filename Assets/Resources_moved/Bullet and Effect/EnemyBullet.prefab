@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3494115126756070505}
   - component: {fileID: 9220902827614482246}
   m_Layer: 10
-  m_Name: Fireball_Enemy
+  m_Name: EnemyBullet
   m_TagString: Fireball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,32 +1,27 @@
 ﻿using System.Threading.Tasks;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Service.Input;
+using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.StaticDataService;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Infrastructure.Factory
 {
-    public class BulletEffectFactory: GameFactoryAbstract
+    public class BulletEffectFactory: IBulletEffectFactory
     {
         private readonly IAssetProvider _assets;
-        private readonly IStaticDataService _staticData;
-        private readonly IInputService _inputService;
+       
 
-        public BulletEffectFactory(IAssetProvider assets, IStaticDataService staticData, IInputService inputService) : base(assets, staticData, inputService)
+        [Inject]
+        public BulletEffectFactory(IAssetProvider assets)
         {
             _assets = assets;
-            _staticData = staticData;
-            _inputService = inputService;
         }
-
-        public void WarmUp()
+        
+        public async Task<GameObject> CreateBullet(string addressPrefab)
         {
-            _assets.Load<GameObject>(AssetsAdress.Shot);
-        }
-
-        public async Task<GameObject> CreateBullet()
-        {
-            GameObject prefab =  await _assets.Load<GameObject>(AssetsAdress.Shot);
+            GameObject prefab =  await _assets.Load<GameObject>(addressPrefab);
             return Object.Instantiate(prefab);
         }
     }

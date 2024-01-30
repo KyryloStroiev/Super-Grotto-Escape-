@@ -14,10 +14,10 @@ namespace CodeBase.Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour, ISavedProgress
     {
-        [SerializeField] private float _speed = 5;
-        [SerializeField] private float _jumpHeight;
-        [SerializeField] private float maxGravityMultiplier = 5f;
-        
+        public float Speed { get; set; }
+        public float JumpHeight { get; set; }
+        public float MaxGravityMultiplier { get; set; } //Додати в код 
+         
         private const float Gravity = -9.81f;
 
         private Vector2 _direction;
@@ -58,13 +58,13 @@ namespace CodeBase.Player
             _rigidbody.MovePosition(_rigidbody.position + _direction * Time.fixedDeltaTime);
 
         private void CheckDirection() => 
-            _direction.x = _runPlayer.Run(_direction.x, _input.Axis.x, _speed);
+            _direction.x = _runPlayer.Run(_direction.x, _input.Axis.x, Speed);
 
         private void Jump()
         {
             if (_colliderChecking.isGround)
             {
-                _direction.y = (float)Math.Sqrt(_jumpHeight * -1f * Gravity);
+                _direction.y = (float)Math.Sqrt(JumpHeight * -1f * Gravity);
                 _isJumping = true;
             }
         }

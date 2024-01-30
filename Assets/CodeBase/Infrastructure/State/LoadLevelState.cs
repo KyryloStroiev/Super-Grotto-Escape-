@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using CodeBase.CameraLogic;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Service;
+using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.PersistentProgress;
 using CodeBase.Infrastructure.Service.StaticDataService;
 using CodeBase.Logic;
@@ -19,27 +20,34 @@ namespace CodeBase.Infrastructure.State
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _curtain;
-        private IGameFactory _gameFactory;
-        private readonly IPersistentProgressService _progressService;
-        private readonly IStaticDataService _staticDataService;
+        private IPlayerFactory _playerFactory;
+        private IEnemyFactory _enemyFactory;
+        private IObjectPool _objectPool;
+        private IPersistentProgressService _progressService;
+        private IStaticDataService _staticDataService;
 
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, 
-            IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService)
+            IPlayerFactory playerFactory, IPersistentProgressService progressService, IStaticDataService staticDataService, IEnemyFactory enemyFactory, IObjectPool objectPool)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
-            _gameFactory = gameFactory;
+            _playerFactory = playerFactory;
             _progressService = progressService;
             _staticDataService = staticDataService;
+            _enemyFactory = enemyFactory;
+            _objectPool = objectPool;
         }
 
         public void Enter(string sceneName)
         {
             _curtain.Show();
-            _gameFactory.Cleanup();
-            _gameFactory.WarmUp();
+            
+            _playerFactory.Cleanup();
+            _enemyFactory.Cleanup();
+            
+            _enemyFactory.WarmUp();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
@@ -60,29 +68,37 @@ namespace CodeBase.Infrastructure.State
 
             GameObject hero = await InitHero(levelData);
             await InitSpawners(levelData);
-            InitHud(hero);
+            await InitHud(hero);
+            await InitObjectPool();
         }
 
         private async Task<GameObject> InitHero(LevelStaticData levelData) => 
-             await _gameFactory.CreateHero(levelData.InitialHeroPosition);
+             await _playerFactory.CreateHero(levelData.InitialHeroPosition);
 
         private async Task InitSpawners(LevelStaticData levelData)
         {
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
-               await _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id, spawnerData.MonsterTypeId);
+               await _enemyFactory.CreateSpawner(spawnerData.Position, spawnerData.Id, 
+                   spawnerData.MonsterTypeId, spawnerData.StartPoint, spawnerData.EndPoint);
         }
 
         private async Task InitHud(GameObject hero)
         {
-            GameObject hud = await _gameFactory.CreateHud();
+            GameObject hud = await _playerFactory.CreateHud();
             
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<IHealth>());
            
         }
 
+        private async Task InitObjectPool() => 
+            await _objectPool.Instantiate();
+
         private void InformProgressReaders()
         {
-            foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
+            foreach (ISavedProgressReader progressReader in _playerFactory.ProgressReaders)
+                progressReader.LoadProgress(_progressService.Progress);
+            
+            foreach (ISavedProgressReader progressReader in _enemyFactory.ProgressReaders)
                 progressReader.LoadProgress(_progressService.Progress);
         }
 

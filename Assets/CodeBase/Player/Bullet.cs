@@ -1,4 +1,6 @@
-﻿using CodeBase.Logic;
+﻿using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.Service.ObjectPool;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Player
@@ -9,7 +11,11 @@ namespace CodeBase.Player
         private float _damage;
         
         public Rigidbody2D Rigidbody;
-        
+        private IObjectPool _objectPool;
+
+        public void Construct(IObjectPool objectPool) => 
+            _objectPool = objectPool;
+
         public void StartShoot(Vector2 direction, float damage)
         {
             _damage = damage;
@@ -23,11 +29,15 @@ namespace CodeBase.Player
         {
             IHealth healthComponent = collider.gameObject.GetComponent<IHealth>();
 
+            Debug.Log(_damage);
             if (healthComponent != null)
             {
                 healthComponent.TakeDamage(_damage);
+                Debug.Log($"Hit {collider.name}");
             }
-            Destroy(gameObject);
+            
+            _objectPool.ReturnToPool(gameObject, AssetsAdress.PlayerBullet);
+            
         }
     }
 }

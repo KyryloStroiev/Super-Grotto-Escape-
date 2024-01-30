@@ -8,5 +8,6 @@ namespace CodeBase.Infrastructure.Service.StaticDataService
         void Load();
         MonsterStaticData ForMonster(MonsterTypeId typeId);
         LevelStaticData ForLevel(string sceneKey);
+        PlayerData ForPlayer(string player);
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory
 {
-    public interface IGameFactory
+    public interface IPlayerFactory
     {
         Task<GameObject> CreateHero(Vector3 at);
         Task<GameObject> CreateHud();
@@ -15,10 +15,5 @@ namespace CodeBase.Infrastructure.Factory
         List<ISavedProgress> ProgressWriters { get; }
         void Cleanup();
         
-        Task<GameObject> CreateMonster(MonsterTypeId typeId, Transform parent, Transform startPointPosition,
-            Transform endPointPosition);
-
-        Task CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId MonsterTypeId);
-        Task WarmUp();
     }
 }

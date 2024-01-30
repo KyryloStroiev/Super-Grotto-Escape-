@@ -1,6 +1,8 @@
 ﻿using System;
 using CodeBase.Data;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Service.Input;
+using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.PersistentProgress;
 using UnityEngine;
 using Zenject;
@@ -18,25 +20,28 @@ namespace CodeBase.Player
         private IInputService _inputService;
         private FlipDirectionPlayer _flip;
         private PlayerAnimator _animator;
+        private IObjectPool _objectPool;
         private Stats _stats;
 
      
-        public void Construct(IInputService inputService)
+        public void Construct(IInputService inputService, IObjectPool objectPool)
         {
             _inputService = inputService;
+            _objectPool = objectPool;
             _inputService.Shoot += StartAttack;
             _flip = GetComponent<FlipDirectionPlayer>();
             _animator = GetComponent<PlayerAnimator>();
+
         }
         private void StartAttack() => 
             _animator.PlayAttack();
 
         private void OnAttack()
         {
-            Bullet bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity)
-                .GetComponent<Bullet>();
             Vector2 direction = _flip.IsFacingRight ? Vector2.right : Vector2.left;
-            bullet.StartShoot(direction, _stats.Damage);
+            GameObject bullet = _objectPool.GetPooledObject(AssetsAdress.PlayerBullet, shootPoint.position);
+            bullet.GetComponent<Bullet>().Construct(_objectPool);
+            bullet.GetComponent<Bullet>().StartShoot(direction, Damage);
         }
 
         private void OnDisable() => 

@@ -15,16 +15,16 @@ namespace CodeBase.Logic.EnemySpawners
         
         public MonsterTypeId MonsterTypeId;
 
-        public Transform StartPoint;
-        public Transform EndPoint;
+        public Vector3 StartPoint;
+        public Vector3 EndPoint;
 
         private bool _slain;
-        private IGameFactory _gameFactory;
+        private IEnemyFactory _enemyFactory;
         private EnemyDeath _enemyDeath;
         
         [Inject]
-        public void Construct(IGameFactory gameFactory) => 
-            _gameFactory = gameFactory;
+        public void Construct(IEnemyFactory enemyFactory) => 
+            _enemyFactory = enemyFactory;
 
         public void LoadProgress(PlayerProgress progress)
         {
@@ -42,8 +42,9 @@ namespace CodeBase.Logic.EnemySpawners
 
         private async void Spawn()
         {
-            GameObject monster = await _gameFactory.CreateMonster(MonsterTypeId, transform, StartPoint, EndPoint);
-
+            GameObject monster = await _enemyFactory.CreateMonster(MonsterTypeId, transform,
+                StartPoint, EndPoint);
+            
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Died += Slay;
         }

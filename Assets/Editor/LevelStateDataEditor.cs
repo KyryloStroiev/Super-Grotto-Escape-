@@ -22,11 +22,17 @@ namespace Editor
             {
                 levelData.EnemySpawners = FindObjectsOfType<SpawnMarket>()
                     .Select(x =>
-                        new EnemySpawnerData(x.GetComponent<UniqueId>().Id, x.MonsterTypeId, x.transform.position))
+                        new EnemySpawnerData(
+                            x.GetComponent<UniqueId>().Id,
+                            x.MonsterTypeId,
+                            x.transform.position,
+                            x.StartPoint != null ? x.StartPoint.transform.position : Vector3.zero,
+                            x.EndPoint != null ? x.EndPoint.transform.position : Vector3.zero))
                     .ToList();
 
                 levelData.LevelKey = SceneManager.GetActiveScene().name;
                 levelData.InitialHeroPosition = GameObject.FindWithTag(Initialpoint).transform.position;
+              Debug.Log(levelData.EnemySpawners.Count);
             }
             
             EditorUtility.SetDirty(target);

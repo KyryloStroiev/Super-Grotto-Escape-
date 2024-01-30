@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Service;
+using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.SaveLoad;
 using CodeBase.Infrastructure.Service.StaticDataService;
 using CodeBase.Logic;
@@ -15,20 +16,25 @@ namespace CodeBase.Infrastructure.State
     {
         private Dictionary<Type,IExitableState> _states;
         private IExitableState _activeState;
-        private IGameFactory _gameFactory;
+        private IPlayerFactory _playerFactory;
+        private IEnemyFactory _enemyFactory;
+        private readonly IObjectPool _objectPool;
         private IPersistentProgressService _persistentProgressService;
         private ISaveLoadService _saveLoadService;
         private IStaticDataService _staticDataService;
         private IAssetProvider _assetProvider;
 
         [Inject]
-        public GameStateMachine(IGameFactory gameFactory, IPersistentProgressService persistentProgressService, ISaveLoadService saveLoadService, IStaticDataService staticDataService, IAssetProvider assetProvider)
+        public GameStateMachine(IPlayerFactory playerFactory, IPersistentProgressService persistentProgressService, ISaveLoadService saveLoadService,
+            IStaticDataService staticDataService, IAssetProvider assetProvider, IEnemyFactory enemyFactory, IObjectPool objectPool)
         {
-            _gameFactory = gameFactory;
+            _playerFactory = playerFactory;
             _persistentProgressService = persistentProgressService;
             _saveLoadService = saveLoadService;
             _staticDataService = staticDataService;
             _assetProvider = assetProvider;
+            _enemyFactory = enemyFactory;
+            _objectPool = objectPool;
         }
 
         public void CreateAllState(SceneLoader sceneLoader, LoadingCurtain curtain)
@@ -37,7 +43,8 @@ namespace CodeBase.Infrastructure.State
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, _staticDataService, _assetProvider),
                 [typeof(LoadProgressState)] = new LoadProgressState(this, _persistentProgressService, _saveLoadService),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, _gameFactory, _persistentProgressService, _staticDataService),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, _playerFactory,
+                    _persistentProgressService, _staticDataService, _enemyFactory, _objectPool),
                 [typeof(GameLoopState)] = new GameLoopState(this),
                 
             };

@@ -2,6 +2,7 @@
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Service;
 using CodeBase.Infrastructure.Service.Input;
+using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.SaveLoad;
 using CodeBase.Infrastructure.Service.StaticDataService;
 using Zenject;
@@ -15,13 +16,32 @@ namespace CodeBase.Zenject
             
             AssetProviderBind();
             PersistentProgressBind();
-            GameFactoryBind();
+            PlayerFactoryBind();
             InputSystemBind();
             SaveLoadServiceBind();
             StaticDataServiceBind();
+            EnemyFactoryBind();
+            BulletEffectFactoryBind();
+
+            ObjectPoolBind();
         }
 
-        /*
+        private void ObjectPoolBind()
+        {
+            Container
+                .Bind<IObjectPool>()
+                .To<ObjectPool>()
+                .AsSingle();
+        }
+
+        private void BulletEffectFactoryBind()
+        {
+            Container
+                .Bind<IBulletEffectFactory>()
+                .To<BulletEffectFactory>()
+                .AsSingle();
+        }
+
         private void EnemyFactoryBind()
         {
             Container
@@ -29,7 +49,6 @@ namespace CodeBase.Zenject
                 .To<EnemyFactory>()
                 .AsSingle();
         }
-        */
 
         private void StaticDataServiceBind()
         {
@@ -69,10 +88,10 @@ namespace CodeBase.Zenject
                 .To<AssetProvider>()
                 .AsSingle();
 
-        private void GameFactoryBind() =>
+        private void PlayerFactoryBind() =>
             Container
-                .Bind<IGameFactory>()
-                .To<GameFactory>()
+                .Bind<IPlayerFactory>()
+                .To<PlayerFactory>()
                 .AsSingle();
 
 

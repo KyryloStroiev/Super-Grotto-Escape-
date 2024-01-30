@@ -1,14 +1,12 @@
-using System;
 using CodeBase.Enemy.EnemyState;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CodeBase.Enemy
 {
     public class EnemyPatrol : MonoBehaviour, IEnemyState
     {
-        public Transform StartPoint { get; set; }
-        public Transform EndPoint { get; set; }
+        public Vector3 StartPoint { get; set; }
+        public Vector3 EndPoint { get; set; }
         
         private Vector3 _direction;
         private Vector3 _currentTarget;
@@ -22,7 +20,7 @@ namespace CodeBase.Enemy
         {
             _move = GetComponent<EnemyMove>();
             _animator = GetComponent<EnemyAnimator>();
-            _currentTarget = StartPoint.position;
+            _currentTarget = StartPoint;
         }
 
         private void Update() => 
@@ -50,7 +48,7 @@ namespace CodeBase.Enemy
         }
 
         private void SwitchTarget() => 
-           _currentTarget = (_currentTarget == StartPoint.position) ? EndPoint.position : StartPoint.position;
+           _currentTarget = (_currentTarget == StartPoint) ? EndPoint : StartPoint;
 
         public void Enable() => _isEnable = true;
 
