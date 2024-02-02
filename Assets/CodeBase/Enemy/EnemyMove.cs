@@ -10,6 +10,8 @@ namespace CodeBase.Enemy
     {
         public float Speed { get; set; }
         
+        public bool IsFlying { get; set; }
+        
         public Rigidbody2D Rigidbody;
  
         private Vector2 _direction;
@@ -18,7 +20,12 @@ namespace CodeBase.Enemy
         public void Move(Vector3 moveTo)
         {
             _direction = (moveTo - gameObject.transform.position).normalized;
-            _direction.y = -2f;
+
+            if (!IsFlying)
+            {
+                _direction.y = -2f;
+            }
+            
             Rigidbody.MovePosition(Rigidbody.position + (_direction * Speed * Time.fixedDeltaTime));
 
         }

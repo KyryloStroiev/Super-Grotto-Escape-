@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeBase.Enemy
 {
-    public class FlipDirectionEnemy : FlipDirection
+    public class EnemyFlipDirection : FlipDirection
     {
         private EnemyMove _move;
 

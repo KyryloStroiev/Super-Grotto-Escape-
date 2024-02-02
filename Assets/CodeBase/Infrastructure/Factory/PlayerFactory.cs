@@ -40,9 +40,6 @@ namespace CodeBase.Infrastructure.Factory
             playerMovement.Speed = playerData.Speed;
             playerMovement.JumpHeight = playerData.JumpHeight;
             playerMovement.MaxGravityMultiplier = playerData.MaxGravityMultiplier;
-
-            PlayerHealth playerHealth = playerGameObject.GetComponent<PlayerHealth>();
-                playerHealth.MaxHP = playerData.MaxHP;
             
             return playerGameObject;
         }

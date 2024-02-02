@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: Player
   MaxHP: 8
-  Damage: 0
-  Speed: 5
+  Damage: 5
+  Speed: 7
   JumpHeight: 4
   MaxGravityMultiplier: 5

@@ -12,7 +12,7 @@ namespace CodeBase.StaticData
         [FormerlySerializedAs("MaxHP")]
         [Header("Health")]
         [Range(1, 100)]
-        public int HP;
+        public float HP;
 
         [Header("Move")] 
         [Range(1, 20)] 
@@ -27,10 +27,12 @@ namespace CodeBase.StaticData
         public float MinDistanceToAttack = 1f;
         
         [Header("Check Player")]
-        [Range(0.2f, 12)] 
+        [Range(0.2f, 20)] 
         public float DistanceForward = 7f;
         [Range(0.1f, 5)]
         public float DistanceBack = 0.2f;
+
+        public bool IsFlying;
         
         public AssetReferenceGameObject PrefabReferenc;
     }

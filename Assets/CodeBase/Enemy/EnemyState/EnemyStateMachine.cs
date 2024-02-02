@@ -8,19 +8,28 @@ namespace CodeBase.Enemy.EnemyState
         public bool IsIdlieState { get; set; }
         
         private List<IEnemyState> _states;
-        private PlayerChecking _checking;
+        private EnemyPlayerChecking _checking;
+        private EnemyAggro _enemyAggro;
+        private EnemyAttackRange _enemyAttackRange;
 
 
         private void Awake()
         {
-            _checking = GetComponent<PlayerChecking>();
+            _checking = GetComponent<EnemyPlayerChecking>();
+            _enemyAggro = GetComponent<EnemyAggro>();
+            _enemyAttackRange = GetComponent<EnemyAttackRange>();
             
             _states = new List<IEnemyState>
             {
                 GetComponent<EnemyPatrol>(),
-                GetComponent<EnemyAggro>(),
                 GetComponent<EnemyIdlie>()
             };
+            
+            if (_enemyAggro != null)
+                _states.Add(_enemyAggro);
+            
+            if(_enemyAttackRange !=null)
+                _states.Add(_enemyAttackRange);
             
             DisableAllState();
         }
@@ -37,7 +46,10 @@ namespace CodeBase.Enemy.EnemyState
             }
             else if (PlayerFound())
             {
-                EnableState<EnemyAggro>();
+                if (_enemyAggro != null)
+                    EnableState<EnemyAggro>();
+                else
+                    EnableState<EnemyAttackRange>();
             }
             else
             {

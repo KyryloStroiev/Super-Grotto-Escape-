@@ -11,14 +11,14 @@ namespace CodeBase.Enemy
         
         private bool _isEnable;
 
-        private PlayerChecking _checking;
+        private EnemyPlayerChecking _checking;
         private EnemyMove _move;
         private EnemyAnimator _animator;
         private EnemyAttackMelee _attack;
         private void Start()
         {
             _move = GetComponent<EnemyMove>();
-            _checking = GetComponent<PlayerChecking>();
+            _checking = GetComponent<EnemyPlayerChecking>();
             _animator = GetComponent<EnemyAnimator>();
             _attack = GetComponent<EnemyAttackMelee>();
         }

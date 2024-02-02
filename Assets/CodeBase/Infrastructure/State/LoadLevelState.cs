@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using CodeBase.CameraLogic;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.Factory.EnemyFactory;
 using CodeBase.Infrastructure.Service;
 using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.PersistentProgress;

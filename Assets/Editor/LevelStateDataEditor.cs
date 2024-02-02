@@ -32,7 +32,6 @@ namespace Editor
 
                 levelData.LevelKey = SceneManager.GetActiveScene().name;
                 levelData.InitialHeroPosition = GameObject.FindWithTag(Initialpoint).transform.position;
-              Debug.Log(levelData.EnemySpawners.Count);
             }
             
             EditorUtility.SetDirty(target);

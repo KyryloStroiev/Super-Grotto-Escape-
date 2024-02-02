@@ -52,10 +52,10 @@ namespace CodeBase.Infrastructure.Service.ObjectPool
             {
                 if (_objectQueues[objectAddress].Count > 0)
                 {
-                    GameObject bullet = _objectQueues[objectAddress].Dequeue();
-                    bullet.transform.position = position;
-                    bullet.SetActive(true);
-                    return bullet;
+                    GameObject obj = _objectQueues[objectAddress].Dequeue();
+                    obj.transform.position = position;
+                    obj.SetActive(true);
+                    return obj;
                 }
                 else
                 {

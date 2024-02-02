@@ -1,5 +1,6 @@
 ﻿using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.Factory.EnemyFactory;
 using CodeBase.Infrastructure.Service.PersistentProgress;
 using UnityEngine;
 using Zenject;

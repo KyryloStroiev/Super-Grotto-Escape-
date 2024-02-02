@@ -11,7 +11,7 @@ using CodeBase.StaticData;
 using CodeBase.UI;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factory
+namespace CodeBase.Infrastructure.Factory.EnemyFactory
 {
     public class EnemyFactory : GameFactory, IEnemyFactory
     {
@@ -26,37 +26,30 @@ namespace CodeBase.Infrastructure.Factory
             _objectPool = objectPool;
         }
         
-        public async Task WarmUp()
-        {
+        public async Task WarmUp() => 
             await _assets.Load<GameObject>(AssetsAdress.Spawner);
-        }
 
         public async Task<GameObject> CreateMonster(MonsterTypeId typeId, Transform parent, Vector3 startPointPosition,
             Vector3 endPointPosition)
         {
             MonsterStaticData monsterData = _staticData.ForMonster(typeId);
-
             GameObject prefab = await _assets.Load<GameObject>(monsterData.PrefabReferenc);
             GameObject monster = InstantiateRegistered(prefab, parent.position);
-            
-            IHealth health = monster.GetComponent<IHealth>();
-            health.CurrentHP = monsterData.HP;
-            health.MaxHP = monsterData.HP;
-            monster.GetComponent<ActorUI>().Construct(health);
-            monster.GetComponent<EnemyMove>().Speed = monsterData.Speed;
 
-            EnemyAttackMelee attackMelee = monster.GetComponent<EnemyAttackMelee>();
-            if (attackMelee != null)
+            MonsterBuilder monsterBuilder = new MonsterBuilder(monster);
+            monsterBuilder.SetHealth(monsterData.HP)
+                          .SetMove(monsterData.Speed, monsterData.IsFlying)
+                          .SetPlayerCheckingDistances(monsterData.DistanceForward, monsterData.DistanceBack);
+
+            if (monster.GetComponent<EnemyAttackMelee>() != null)
             {
-                attackMelee.Damage = monsterData.Damage;
-                attackMelee.Cooldown = monsterData.Cooldown;
+                monsterBuilder.SetMelleAttack(monsterData.Damage, monsterData.Cooldown,
+                    monsterData.MinDistanceToAttack);
             }
-            
-            monster.GetComponent<EnemyAggro>().MinDistanceToAttack = monsterData.MinDistanceToAttack;
-
-            PlayerChecking playerChecking = monster.GetComponent<PlayerChecking>();
-            playerChecking.DistanceForward = monsterData.DistanceForward;
-            playerChecking.DistanceBack = monsterData.DistanceBack;
+            else if (monster.GetComponent<EnemyAttackRange>() != null)
+            {
+                monsterBuilder.SetRangeAttack(monsterData.Damage, monsterData.Cooldown, _objectPool);
+            }
             
             CreatePatrolPoint(startPointPosition, endPointPosition, monster);
             

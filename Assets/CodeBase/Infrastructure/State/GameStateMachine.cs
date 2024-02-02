@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.Factory.EnemyFactory;
 using CodeBase.Infrastructure.Service;
 using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.SaveLoad;
@@ -42,7 +43,7 @@ namespace CodeBase.Infrastructure.State
             _states = new Dictionary<Type, IExitableState>()
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, _staticDataService, _assetProvider),
-                [typeof(LoadProgressState)] = new LoadProgressState(this, _persistentProgressService, _saveLoadService),
+                [typeof(LoadProgressState)] = new LoadProgressState(this, _persistentProgressService, _saveLoadService, _staticDataService),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, _playerFactory,
                     _persistentProgressService, _staticDataService, _enemyFactory, _objectPool),
                 [typeof(GameLoopState)] = new GameLoopState(this),

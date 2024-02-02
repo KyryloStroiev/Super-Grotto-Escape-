@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baf49425ee7942c5b5961ba1f4fb47c6, type: 3}
-  m_Name: Skelet
+  m_Name: Lizard
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
-  HP: 8
-  Speed: 6
+  MonsterTypeId: 2
+  HP: 16
+  Speed: 3
   Damage: 1
-  Cooldown: 1.54
-  MinDistanceToAttack: 1.2
-  DistanceForward: 7
-  DistanceBack: 2.16
+  Cooldown: 1.5
+  MinDistanceToAttack: 1
+  DistanceForward: 12
+  DistanceBack: 0.1
   IsFlying: 0
   PrefabReferenc:
-    m_AssetGUID: b95699c8f046e38419115e02426e994f
+    m_AssetGUID: 38772b71fd6efe94e878041a94e2a3f9
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baf49425ee7942c5b5961ba1f4fb47c6, type: 3}
-  m_Name: Skelet
+  m_Name: Bat
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
-  HP: 8
-  Speed: 6
+  MonsterTypeId: 1
+  HP: 4
+  Speed: 2
   Damage: 1
-  Cooldown: 1.54
-  MinDistanceToAttack: 1.2
+  Cooldown: 1
+  MinDistanceToAttack: 1
   DistanceForward: 7
-  DistanceBack: 2.16
-  IsFlying: 0
+  DistanceBack: 0.2
+  IsFlying: 1
   PrefabReferenc:
-    m_AssetGUID: b95699c8f046e38419115e02426e994f
+    m_AssetGUID: 2ae045fac13ee0b448ba3f9d617522d9
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

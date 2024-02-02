@@ -1,9 +1,7 @@
-﻿using CodeBase.Infrastructure.AssetManagement;
-using CodeBase.Infrastructure.Service.ObjectPool;
-using CodeBase.Logic;
+﻿using CodeBase.Infrastructure.Service.ObjectPool;
 using UnityEngine;
 
-namespace CodeBase.Player
+namespace CodeBase.Logic
 {
     public class Bullet: MonoBehaviour
     {
@@ -12,9 +10,13 @@ namespace CodeBase.Player
         
         public Rigidbody2D Rigidbody;
         private IObjectPool _objectPool;
+        private string _assetsAddress;
 
-        public void Construct(IObjectPool objectPool) => 
+        public void Construct(IObjectPool objectPool, string assetsAddress)
+        {
+            _assetsAddress = assetsAddress;
             _objectPool = objectPool;
+        }
 
         public void StartShoot(Vector2 direction, float damage)
         {
@@ -28,15 +30,13 @@ namespace CodeBase.Player
         private void OnTriggerEnter2D(Collider2D collider)
         {
             IHealth healthComponent = collider.gameObject.GetComponent<IHealth>();
-
-            Debug.Log(_damage);
+            
             if (healthComponent != null)
             {
                 healthComponent.TakeDamage(_damage);
-                Debug.Log($"Hit {collider.name}");
             }
             
-            _objectPool.ReturnToPool(gameObject, AssetsAdress.PlayerBullet);
+            _objectPool.ReturnToPool(gameObject, _assetsAddress);
             
         }
     }

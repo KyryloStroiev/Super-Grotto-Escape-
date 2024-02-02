@@ -3,7 +3,7 @@ using UnityEngine.Serialization;
 
 namespace CodeBase.Enemy
 {
-    public class PlayerChecking : MonoBehaviour
+    public class EnemyPlayerChecking : MonoBehaviour
     {
         
         public float DistanceForward { get; set; }

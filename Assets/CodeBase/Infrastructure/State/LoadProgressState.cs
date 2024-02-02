@@ -1,8 +1,10 @@
 ﻿using System;
 using CodeBase.Data;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Service;
 using CodeBase.Infrastructure.Service.SaveLoad;
+using CodeBase.Infrastructure.Service.StaticDataService;
 using CodeBase.StaticData;
 
 namespace CodeBase.Infrastructure.State
@@ -12,12 +14,14 @@ namespace CodeBase.Infrastructure.State
         private readonly GameStateMachine _gameStateMachine;
         private readonly IPersistentProgressService _progressService;
         private ISaveLoadService _saveLoadService;
+        private readonly IStaticDataService _staticData;
 
-        public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService, ISaveLoadService saveLoadService)
+        public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService, ISaveLoadService saveLoadService, IStaticDataService staticData)
         {
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;
             _saveLoadService = saveLoadService;
+            _staticData = staticData;
         }
 
         public void Enter()
@@ -40,7 +44,9 @@ namespace CodeBase.Infrastructure.State
         private PlayerProgress NewProgress()
         {
           PlayerProgress progress = new PlayerProgress(initialLevel: LevelId.Level_1.ToString());
-          
+          PlayerData playerData = _staticData.ForPlayer(AssetsAdress.Player);
+          progress.PlayerState.MaxHP = playerData.MaxHP;
+          progress.PlayerState.CurrentHP = playerData.MaxHP;
           progress.PlayerState.ResetHP();
 
           return progress;

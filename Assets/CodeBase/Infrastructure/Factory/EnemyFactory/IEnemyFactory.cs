@@ -4,7 +4,7 @@ using CodeBase.Infrastructure.Service.PersistentProgress;
 using CodeBase.StaticData;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factory
+namespace CodeBase.Infrastructure.Factory.EnemyFactory
 {
     public interface  IEnemyFactory
     {

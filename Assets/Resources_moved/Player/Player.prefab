@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 7888036207764629745}
   - component: {fileID: 7969378296529186453}
   - component: {fileID: -5132441168775637295}
+  - component: {fileID: -5045645861659066520}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -267,9 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4623c8e5785c204cbf5ae6f284f558c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
-  _jumpHeight: 4
-  maxGravityMultiplier: 10
 --- !u!114 &2300214742202053767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BoxCollider: {fileID: 3532056237615392016}
-  circleRadius: 0.29
+  circleRadius: 0.2
   circleOffsetY: -1.01
   isGround: 1
 --- !u!114 &-8653590967168264892
@@ -350,4 +348,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 3532056237176744365}
-  bulletPrefab: {fileID: 1090934335115656906, guid: 9f6e025af706b5a4e907f23a3c0b2cdf, type: 3}
+--- !u!114 &-5045645861659066520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3532056237615392026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f427aeab541148c59b1da93ab11daafb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsOnLadder: 0

@@ -43,8 +43,8 @@ namespace CodeBase.Enemy
 
         private bool IsCloseToTarget()
         { 
-            float distanceToTarget = Mathf.Abs(_currentTarget.x - transform.position.x);
-           return (distanceToTarget <= 1f);
+            Vector3 distanceToTarget = _currentTarget - transform.position;
+            return distanceToTarget.magnitude <= 1f;
         }
 
         private void SwitchTarget() => 
