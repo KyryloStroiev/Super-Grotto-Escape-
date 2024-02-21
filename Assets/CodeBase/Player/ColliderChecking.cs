@@ -29,9 +29,7 @@ namespace CodeBase.Player
             _layerMaskGround = 1 << LayerMask.NameToLayer(LayerGround);
             _layerMaskLadder = 1 << LayerMask.NameToLayer(LayerLadder);
         }
-
-       
-
+        
         private void Update()
         {
             isGround = CheckGround(_layerMaskGround);
@@ -40,8 +38,6 @@ namespace CodeBase.Player
             isObstacleRight = CheckCollision(Vector2.right, BoxCollider.bounds.size.x * 0.5f);
 
             IsLadder = CheckGround(_layerMaskLadder);
-            
-            Debug.Log(IsLadder);
         }
 
         private bool CheckCollision(Vector2 raycastDirection, float rendererExtents)

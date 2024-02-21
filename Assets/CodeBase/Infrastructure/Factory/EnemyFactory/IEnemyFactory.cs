@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using CodeBase.Infrastructure.Service.PersistentProgress;
 using CodeBase.StaticData;
+using CodeBase.StaticData.Enemy;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory.EnemyFactory

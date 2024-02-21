@@ -10,7 +10,6 @@ namespace CodeBase.Infrastructure
     {
         public LoadingCurtain CurtainPrefab;
         
-        private Game _game;
         private IGameStateMachine _stateMachine;
 
         [Inject]

@@ -33,7 +33,6 @@ namespace CodeBase.Player
         {
             Vector2 direction = _flip.IsFacingRight ? Vector2.right : Vector2.left;
             GameObject bullet = _objectPool.GetPooledObject(AssetsAdress.PlayerBullet, shootPoint.position);
-            bullet.GetComponent<Bullet>().Construct(_objectPool, AssetsAdress.PlayerBullet);
             bullet.GetComponent<Bullet>().StartShoot(direction, Damage);
         }
 

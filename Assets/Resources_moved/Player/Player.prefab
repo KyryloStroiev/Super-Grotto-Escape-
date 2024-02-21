@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 7969378296529186453}
   - component: {fileID: -5132441168775637295}
   - component: {fileID: -5045645861659066520}
+  - component: {fileID: -3211170703840720836}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -223,7 +224,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -321,7 +322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e83acdf867840a0b7f8c5a6dc9e7de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoxCollider: {fileID: 3532056237615392016}
 --- !u!114 &7969378296529186453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,3 +361,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsOnLadder: 0
+--- !u!114 &-3211170703840720836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3532056237615392026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44805da9947d4586b6a5d3b230a3c29a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

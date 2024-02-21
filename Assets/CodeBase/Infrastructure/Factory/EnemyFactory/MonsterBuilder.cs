@@ -2,6 +2,7 @@
 using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Logic;
 using CodeBase.UI;
+using CodeBase.UI.Elements;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory.EnemyFactory
@@ -43,6 +44,14 @@ namespace CodeBase.Infrastructure.Factory.EnemyFactory
             return this;
         }
 
+        public MonsterBuilder SetObjectPool(IObjectPool objectPool)
+        {
+            EnemyDeath enemyDeath = _monster.GetComponent<EnemyDeath>();
+            enemyDeath.Construct(objectPool);
+
+            return this;
+        }
+        
         public MonsterBuilder SetRangeAttack(float damage, float cooldown, IObjectPool objectPool)
         {
             EnemyAttackRange attackRange = _monster.GetComponent<EnemyAttackRange>();

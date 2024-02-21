@@ -18,18 +18,13 @@ namespace CodeBase.Enemy.EnemyState
             _checking = GetComponent<EnemyPlayerChecking>();
             _enemyAggro = GetComponent<EnemyAggro>();
             _enemyAttackRange = GetComponent<EnemyAttackRange>();
+
+            _states = new List<IEnemyState>();
+            AddState<EnemyPatrol>();
+            AddState<EnemyIdlie>();
             
-            _states = new List<IEnemyState>
-            {
-                GetComponent<EnemyPatrol>(),
-                GetComponent<EnemyIdlie>()
-            };
-            
-            if (_enemyAggro != null)
-                _states.Add(_enemyAggro);
-            
-            if(_enemyAttackRange !=null)
-                _states.Add(_enemyAttackRange);
+            AddStateIfAvailable<EnemyAggro>();
+            AddStateIfAvailable<EnemyAttackRange>();
             
             DisableAllState();
         }
@@ -39,17 +34,11 @@ namespace CodeBase.Enemy.EnemyState
 
         private void ChangeState()
         {
-            
-            if (IsIdlieState && PlayerNotFound())
+            IEnemyState newState = FindMatchingState();
+
+            if (newState != null)
             {
-                EnableState<EnemyIdlie>();
-            }
-            else if (PlayerFound())
-            {
-                if (_enemyAggro != null)
-                    EnableState<EnemyAggro>();
-                else
-                    EnableState<EnemyAttackRange>();
+                EnableState(newState);
             }
             else
             {
@@ -57,10 +46,36 @@ namespace CodeBase.Enemy.EnemyState
             }
         }
 
+        private IEnemyState FindMatchingState()
+        {
+            foreach (IEnemyState state in _states)
+            {
+                if (state is EnemyIdlie && IsIdlieState && PlayerNotFound())
+                {
+                    return state;
+                }
+                else if (state is EnemyAggro && PlayerFound())
+                {
+                    return state;
+                }
+                else if(state is EnemyAttackRange && PlayerFound())
+                {
+                    return state;
+                }
+            }
+            return null;
+        }
+        
         private void EnableState<TState>() where TState : IEnemyState
         {
             DisableAllState();
             var state = _states.Find(x => x is TState);
+            state?.Enable();
+        }
+        
+        private void EnableState(IEnemyState state)
+        {
+            DisableAllState();
             state?.Enable();
         }
 
@@ -69,6 +84,18 @@ namespace CodeBase.Enemy.EnemyState
             foreach (IEnemyState state in _states)
             {
                 state.Disable();
+            }
+        }
+
+        private void AddState<TState>() where TState : IEnemyState => 
+            _states.Add(GetComponent<TState>());
+
+        private void AddStateIfAvailable<TState>() where TState : IEnemyState
+        {
+            TState component = GetComponent<TState>();
+            if (component != null)
+            {
+                _states.Add(component);
             }
         }
 

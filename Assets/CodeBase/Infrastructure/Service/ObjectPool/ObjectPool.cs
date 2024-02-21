@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Logic;
 using CodeBase.Player;
 using UnityEngine;
 using Zenject;
+using IPoolable = CodeBase.Logic.IPoolable;
 using Object = UnityEngine.Object;
 
 namespace CodeBase.Infrastructure.Service.ObjectPool
@@ -14,24 +16,26 @@ namespace CodeBase.Infrastructure.Service.ObjectPool
     {
         private Dictionary<string, Queue<GameObject>> _objectQueues = new();
 
-        private int _size = 14;
+        private int _size = 7;
         private const string ObjectPoolFolder = "ObjectPool";
 
         private  IBulletEffectFactory _bulletEffectFactory;
+        private IAssetProvider _assetProvider;
         private GameObject _poolObject;
 
-        [Inject]
-        public ObjectPool(IBulletEffectFactory bulletEffectFactory)
+
+        public async Task Instantiate(IAssetProvider assetProvider)
         {
-            _bulletEffectFactory = bulletEffectFactory;
-        }
-        
-        public async Task Instantiate()
-        {
+            _assetProvider = assetProvider;
+            _bulletEffectFactory = new BulletEffectFactory(_assetProvider);
             CreateFolder();
             await Create(AssetsAdress.PlayerBullet);
             await Create(AssetsAdress.EnemyBullet);
+            await Create(AssetsAdress.BulletEffect);
+            await Create(AssetsAdress.ExplosionSmall);
+            await Create(AssetsAdress.GunBullet);
         }
+
 
         private async Task Create(string objectAdress)
         {
@@ -41,10 +45,12 @@ namespace CodeBase.Infrastructure.Service.ObjectPool
             {
                 GameObject obj = await _bulletEffectFactory.CreateBullet(objectAdress);
                 _objectQueues[objectAdress].Enqueue(obj);
+                obj.GetComponent<IPoolable>().Construct(this, objectAdress);
                 obj.transform.SetParent(_poolObject.transform);
                 obj.SetActive(false);
             }
         }
+        
 
         public GameObject GetPooledObject(string objectAddress, Vector3 position)
         {

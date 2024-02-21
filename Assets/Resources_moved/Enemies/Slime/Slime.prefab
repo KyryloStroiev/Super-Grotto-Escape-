@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1827845604787684146}
   - component: {fileID: 1827845604787684145}
   - component: {fileID: 1827845604787684144}
+  - component: {fileID: 3347142690118262511}
   - component: {fileID: 1827845604787684159}
   - component: {fileID: 1827845604787684157}
   - component: {fileID: -5880908807853430278}
@@ -23,6 +24,7 @@ GameObject:
   - component: {fileID: 3681150313120367077}
   - component: {fileID: 2576098869427258168}
   - component: {fileID: 8181371640497856851}
+  - component: {fileID: 3696294482852491520}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Enemy
@@ -143,6 +145,51 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.29, y: 1.16}
   m_EdgeRadius: 0
+--- !u!61 &3347142690118262511
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827845604787684156}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.22}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.61, y: 0.15}
+  m_EdgeRadius: 0
 --- !u!50 &1827845604787684159
 Rigidbody2D:
   serializedVersion: 4
@@ -215,7 +262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a641256af6444608fdd703e5a4425ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplossionSmall: {fileID: 6610025337091394087, guid: fbac696077873ea46ba1a1787c40c7f8, type: 3}
 --- !u!114 &-3983762283517371882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +362,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BoxCollider: {fileID: 1827845604787684144}
+--- !u!114 &3696294482852491520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827845604787684156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91967f07a24797b4eba12a8a42916a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1001 &862927689513745702
 PrefabInstance:
   m_ObjectHideFlags: 0

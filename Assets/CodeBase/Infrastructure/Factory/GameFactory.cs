@@ -5,6 +5,8 @@ using CodeBase.Infrastructure.Service.Input;
 using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.PersistentProgress;
 using CodeBase.Infrastructure.Service.StaticDataService;
+using CodeBase.Infrastructure.State;
+using CodeBase.UI.Service.Menu;
 using UnityEngine;
 using Zenject;
 
@@ -17,17 +19,21 @@ namespace CodeBase.Infrastructure.Factory
         private IStaticDataService _staticData;
         private IInputService _inputService;
         private readonly IObjectPool _objectPool;
+        private readonly IMenuService _menuService;
+        private readonly IGameStateMachine _gameStateMachine;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new();
         public List<ISavedProgress> ProgressWriters { get; } = new();
         
         [Inject]
-        public GameFactory(IAssetProvider assets, IStaticDataService staticData, IInputService inputService, IObjectPool objectPool)
+        public GameFactory(IAssetProvider assets, IStaticDataService staticData, IInputService inputService,
+            IObjectPool objectPool, IMenuService menuService)
         {
             _assets = assets;
             _staticData = staticData;  
             _inputService = inputService;
             _objectPool = objectPool;
+            _menuService = menuService;
         }
         
         public void Cleanup()

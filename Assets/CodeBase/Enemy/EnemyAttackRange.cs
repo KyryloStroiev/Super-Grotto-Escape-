@@ -47,7 +47,6 @@ namespace CodeBase.Enemy
             _direction = _flip.IsFacingRight ? Vector2.right : Vector2.left;
           
             GameObject bullet = _objectPool.GetPooledObject(AssetsAdress.EnemyBullet, ShootPoint.position);
-            bullet.GetComponent<Bullet>().Construct(_objectPool, AssetsAdress.EnemyBullet);
             bullet.GetComponent<Bullet>().StartShoot(_direction, Damage);   
         }
 

@@ -1,6 +1,7 @@
 ﻿using CodeBase.Logic;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.StaticData;
+using CodeBase.StaticData.Enemy;
 using UnityEditor;
 using UnityEngine;
 

@@ -22,6 +22,36 @@ namespace CodeBase.Player
             {
                 IsOnLadder = true;
             }
+            else
+            {
+                IsOnLadder = false;
+            }
+            _animator.PlayOnLadder(IsOnLadder);
+        }
+        
+        public float MoveUp(float direction, float input, float speed)
+        {
+            float speedClimp = speed / 3;
+            if (_checking.IsLadder)
+            {
+                direction = input * speedClimp;
+            }
+               
+
+            return direction;
         }
     }
 }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

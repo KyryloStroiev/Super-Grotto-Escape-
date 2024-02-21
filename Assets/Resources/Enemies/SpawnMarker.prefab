@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartPoint: {fileID: 4530341261438761846}
   EndPoint: {fileID: 5000589852076294848}
-  MonsterTypeId: 0
+  MonsterTypeId: 3
 --- !u!114 &1969397972446129672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a61d30598104effaf1474e8ddd56ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: _0c7e2d53-d396-419b-b341-b11e98c8ec1b
+  Id: _98c51edc-11a5-4884-8dc7-3ddad1986861
 --- !u!1001 &5159698272127528188
 PrefabInstance:
   m_ObjectHideFlags: 0

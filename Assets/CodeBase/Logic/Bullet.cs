@@ -1,9 +1,10 @@
-﻿using CodeBase.Infrastructure.Service.ObjectPool;
+﻿using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.Service.ObjectPool;
 using UnityEngine;
 
 namespace CodeBase.Logic
 {
-    public class Bullet: MonoBehaviour
+    public class Bullet: MonoBehaviour, IPoolable
     {
         [SerializeField] private float _speed = 10f;
         private float _damage;
@@ -35,7 +36,8 @@ namespace CodeBase.Logic
             {
                 healthComponent.TakeDamage(_damage);
             }
-            
+
+            _objectPool.GetPooledObject(AssetsAdress.BulletEffect, transform.position);
             _objectPool.ReturnToPool(gameObject, _assetsAddress);
             
         }

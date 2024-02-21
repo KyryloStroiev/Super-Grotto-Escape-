@@ -1,4 +1,6 @@
 ﻿using System;
+using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Logic;
 using UnityEngine;
 
@@ -6,13 +8,15 @@ namespace CodeBase.Enemy
 {
     public class EnemyDeath: MonoBehaviour
     {
-        
-        public GameObject ExplossionSmall;
-        
         public event Action Died;
 
         private EnemyHealth _health;
+        private IObjectPool _objectPool;
 
+        public void Construct(IObjectPool objectPool)
+        {
+            _objectPool = objectPool;
+        }
         private void Start()
         {
             _health = GetComponent<EnemyHealth>();
@@ -28,7 +32,7 @@ namespace CodeBase.Enemy
 
         private void Die()
         {
-            Instantiate(ExplossionSmall, transform.position, Quaternion.identity);
+            _objectPool.GetPooledObject(AssetsAdress.ExplosionSmall, transform.position);
             Died?.Invoke();
             Destroy(gameObject);
         }

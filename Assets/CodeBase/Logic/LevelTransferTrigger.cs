@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.State;
 using CodeBase.StaticData;
+using CodeBase.StaticData.Level;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;

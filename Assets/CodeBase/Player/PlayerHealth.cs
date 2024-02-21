@@ -9,7 +9,6 @@ namespace CodeBase.Player
     [RequireComponent(typeof(PlayerAnimator))]
     public class PlayerHealth : MonoBehaviour, ISavedProgress, IHealth
     {
-        public BoxCollider2D BoxCollider;
         public event Action HealthChanged;
         
         private PlayerState _state;
@@ -46,17 +45,29 @@ namespace CodeBase.Player
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.PlayerState.CurrentHP = CurrentHP;
-            progress.PlayerState.MaxHP = MaxHP;
+            if (progress.PlayerState.CurrentHP != null)
+            {
+                progress.PlayerState.CurrentHP = CurrentHP;
+                progress.PlayerState.MaxHP = MaxHP;
+            }
         }
 
         public void TakeDamage(float damage)
         {
             if (CurrentHP <= 0)
                 return;
-
+            
             CurrentHP -= damage;
             _animator.PlayHit();
+        }
+
+        public void Healing(float health)
+        {
+            CurrentHP += health;
+            if (CurrentHP >= MaxHP)
+            {
+                CurrentHP = MaxHP;
+            }
         }
         
     }

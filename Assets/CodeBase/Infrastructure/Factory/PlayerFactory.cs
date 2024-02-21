@@ -3,8 +3,12 @@ using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Service.Input;
 using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.StaticDataService;
+using CodeBase.Infrastructure.State;
 using CodeBase.Player;
 using CodeBase.StaticData;
+using CodeBase.StaticData.Player;
+using CodeBase.UI.Elements;
+using CodeBase.UI.Service.Menu;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory
@@ -15,13 +19,16 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private IInputService _inputService;
         private readonly IObjectPool _objectPool;
+        private readonly IMenuService _menuService;
 
-        public PlayerFactory(IAssetProvider assets, IStaticDataService staticData, IInputService inputService, IObjectPool objectPool) : base(assets, staticData, inputService, objectPool)
+        public PlayerFactory(IAssetProvider assets, IStaticDataService staticData, IInputService inputService, IObjectPool objectPool, IMenuService menuService) :
+            base(assets, staticData, inputService, objectPool, menuService)
         {
             _assets = assets;
             _staticData = staticData;
             _inputService = inputService;
             _objectPool = objectPool;
+            _menuService = menuService;
         }
         
         public async Task<GameObject> CreateHero(Vector3 at)
@@ -45,9 +52,16 @@ namespace CodeBase.Infrastructure.Factory
         }
 
         
-        public async Task<GameObject> CreateHud() =>
-           await InstantiateRegisteredAsync(AssetsAdress.Hud);
+        public async Task<GameObject> CreateHud()
+        {
+            GameObject hud = await InstantiateRegisteredAsync(AssetsAdress.Hud);
 
-       
+            foreach (OpenMenuButton openMenuButton in hud.GetComponentsInChildren<OpenMenuButton>())
+            {
+                openMenuButton.Construct(_menuService);
+            }
+
+            return hud;
+        }
     }
 }

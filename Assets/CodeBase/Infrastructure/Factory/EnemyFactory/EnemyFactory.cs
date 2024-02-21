@@ -5,10 +5,13 @@ using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Service.Input;
 using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.StaticDataService;
+using CodeBase.Infrastructure.State;
 using CodeBase.Logic;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.StaticData;
+using CodeBase.StaticData.Enemy;
 using CodeBase.UI;
+using CodeBase.UI.Service.Menu;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory.EnemyFactory
@@ -19,8 +22,9 @@ namespace CodeBase.Infrastructure.Factory.EnemyFactory
         private readonly IStaticDataService _staticData;
         private readonly IObjectPool _objectPool;
 
-        public EnemyFactory(IAssetProvider assets, IStaticDataService staticData, IInputService inputService, IObjectPool objectPool) : base(assets, staticData, inputService, objectPool)
-        {
+        public EnemyFactory(IAssetProvider assets, IStaticDataService staticData, IInputService inputService, IObjectPool objectPool, IMenuService menuService) :
+            base(assets, staticData, inputService, objectPool, menuService)
+        {       
             _assets = assets;
             _staticData = staticData;
             _objectPool = objectPool;
@@ -39,7 +43,8 @@ namespace CodeBase.Infrastructure.Factory.EnemyFactory
             MonsterBuilder monsterBuilder = new MonsterBuilder(monster);
             monsterBuilder.SetHealth(monsterData.HP)
                           .SetMove(monsterData.Speed, monsterData.IsFlying)
-                          .SetPlayerCheckingDistances(monsterData.DistanceForward, monsterData.DistanceBack);
+                          .SetPlayerCheckingDistances(monsterData.DistanceForward, monsterData.DistanceBack)
+                          .SetObjectPool(_objectPool);
 
             if (monster.GetComponent<EnemyAttackMelee>() != null)
             {

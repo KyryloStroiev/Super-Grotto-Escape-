@@ -8,6 +8,7 @@ using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.SaveLoad;
 using CodeBase.Infrastructure.Service.StaticDataService;
 using CodeBase.Logic;
+using CodeBase.UI.Service.Factory;
 using UnityEngine;
 using Zenject;
 
@@ -20,6 +21,7 @@ namespace CodeBase.Infrastructure.State
         private IPlayerFactory _playerFactory;
         private IEnemyFactory _enemyFactory;
         private readonly IObjectPool _objectPool;
+        private readonly IUIFactory _uiFactory;
         private IPersistentProgressService _persistentProgressService;
         private ISaveLoadService _saveLoadService;
         private IStaticDataService _staticDataService;
@@ -27,7 +29,7 @@ namespace CodeBase.Infrastructure.State
 
         [Inject]
         public GameStateMachine(IPlayerFactory playerFactory, IPersistentProgressService persistentProgressService, ISaveLoadService saveLoadService,
-            IStaticDataService staticDataService, IAssetProvider assetProvider, IEnemyFactory enemyFactory, IObjectPool objectPool)
+            IStaticDataService staticDataService, IAssetProvider assetProvider, IEnemyFactory enemyFactory, IObjectPool objectPool, IUIFactory uiFactory)
         {
             _playerFactory = playerFactory;
             _persistentProgressService = persistentProgressService;
@@ -36,6 +38,7 @@ namespace CodeBase.Infrastructure.State
             _assetProvider = assetProvider;
             _enemyFactory = enemyFactory;
             _objectPool = objectPool;
+            _uiFactory = uiFactory;
         }
 
         public void CreateAllState(SceneLoader sceneLoader, LoadingCurtain curtain)
@@ -45,7 +48,7 @@ namespace CodeBase.Infrastructure.State
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, _staticDataService, _assetProvider),
                 [typeof(LoadProgressState)] = new LoadProgressState(this, _persistentProgressService, _saveLoadService, _staticDataService),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, _playerFactory,
-                    _persistentProgressService, _staticDataService, _enemyFactory, _objectPool),
+                    _persistentProgressService, _staticDataService, _enemyFactory, _objectPool, _assetProvider, _uiFactory),
                 [typeof(GameLoopState)] = new GameLoopState(this),
                 
             };

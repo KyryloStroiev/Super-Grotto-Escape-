@@ -6,6 +6,8 @@ using CodeBase.Infrastructure.Service;
 using CodeBase.Infrastructure.Service.SaveLoad;
 using CodeBase.Infrastructure.Service.StaticDataService;
 using CodeBase.StaticData;
+using CodeBase.StaticData.Level;
+using CodeBase.StaticData.Player;
 
 namespace CodeBase.Infrastructure.State
 {

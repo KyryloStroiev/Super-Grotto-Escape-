@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
+using Cinemachine;
 using CodeBase.CameraLogic;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Factory.EnemyFactory;
 using CodeBase.Infrastructure.Service;
@@ -9,7 +11,11 @@ using CodeBase.Infrastructure.Service.StaticDataService;
 using CodeBase.Logic;
 using CodeBase.Player;
 using CodeBase.StaticData;
+using CodeBase.StaticData.Enemy;
+using CodeBase.StaticData.Level;
 using CodeBase.UI;
+using CodeBase.UI.Elements;
+using CodeBase.UI.Service.Factory;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,12 +30,16 @@ namespace CodeBase.Infrastructure.State
         private IPlayerFactory _playerFactory;
         private IEnemyFactory _enemyFactory;
         private IObjectPool _objectPool;
+        private readonly IAssetProvider _assetProvider;
         private IPersistentProgressService _progressService;
         private IStaticDataService _staticDataService;
+        private IUIFactory _uiFactrory;
 
 
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, 
-            IPlayerFactory playerFactory, IPersistentProgressService progressService, IStaticDataService staticDataService, IEnemyFactory enemyFactory, IObjectPool objectPool)
+        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain,
+            IPlayerFactory playerFactory, IPersistentProgressService progressService,
+            IStaticDataService staticDataService, IEnemyFactory enemyFactory, IObjectPool objectPool,
+            IAssetProvider assetProvider, IUIFactory uiFactrory)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
@@ -39,6 +49,8 @@ namespace CodeBase.Infrastructure.State
             _staticDataService = staticDataService;
             _enemyFactory = enemyFactory;
             _objectPool = objectPool;
+            _assetProvider = assetProvider;
+            _uiFactrory = uiFactrory;
         }
 
         public void Enter(string sceneName)
@@ -57,11 +69,15 @@ namespace CodeBase.Infrastructure.State
 
         private async void OnLoaded()
         {
+            await InitUIRoot();
             await InitGameWorld();
             InformProgressReaders();
             
             _stateMachine.Enter<GameLoopState>();
         }
+
+        private async Task InitUIRoot() => 
+            await _uiFactrory.CreateUIRoot();
 
         private async Task InitGameWorld()
         {
@@ -73,8 +89,12 @@ namespace CodeBase.Infrastructure.State
             await InitObjectPool();
         }
 
-        private async Task<GameObject> InitHero(LevelStaticData levelData) => 
-             await _playerFactory.CreateHero(levelData.InitialHeroPosition);
+        private async Task<GameObject> InitHero(LevelStaticData levelData)
+        {
+            GameObject player =  await _playerFactory.CreateHero(levelData.InitialHeroPosition);
+            CameraFollow(player);
+            return player;
+        }
 
         private async Task InitSpawners(LevelStaticData levelData)
         {
@@ -88,11 +108,12 @@ namespace CodeBase.Infrastructure.State
             GameObject hud = await _playerFactory.CreateHud();
             
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<IHealth>());
+            hud.GetComponentInChildren<PlayerUI>().Construct(hero.GetComponent<PlayerTakeBattery>());
            
         }
 
         private async Task InitObjectPool() => 
-            await _objectPool.Instantiate();
+            await _objectPool.Instantiate(_assetProvider);
 
         private void InformProgressReaders()
         {
@@ -106,8 +127,7 @@ namespace CodeBase.Infrastructure.State
         private static void CameraFollow(GameObject hero)
         {
             Camera.main
-                .GetComponent<CameraFollow>()
-                .Follow(hero);
+                .GetComponentInChildren<CameraFollow>().Follow(hero);
         }
 
         private LevelStaticData LevelStaticData() => 

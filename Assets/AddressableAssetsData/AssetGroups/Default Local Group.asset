@@ -58,7 +58,32 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2ae045fac13ee0b448ba3f9d617522d9
-    m_Address: Assets/Resources_moved/Enemies/Bat/Bat.prefab
+    m_Address: Bat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70f0d16a3ec8edd4495a7668df9c4a85
+    m_Address: BulletEffect
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20eca17762895344b8a070be055391be
+    m_Address: ExplosionBig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fbac696077873ea46ba1a1787c40c7f8
+    m_Address: ExplosionSmall
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d261f74cba1afa4991a4fbd2098ebcd
+    m_Address: UIRoot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 154467d711da9cd43bd5e5b46a9ca103
+    m_Address: GunBullet
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

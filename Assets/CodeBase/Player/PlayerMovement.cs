@@ -25,11 +25,13 @@ namespace CodeBase.Player
         
         private bool _isJumping;
         public bool IsJumping => _isJumping;
-        
+        public float VerticalVelocity => _direction.y;
+
         private IInputService _input;
         private RunPlayer _runPlayer;
         private ColliderChecking _colliderChecking;
         private GravityHandler _gravityHandler;
+        private PlayerClimpUp _climpUp;
         
         private Rigidbody2D _rigidbody;
         
@@ -38,6 +40,7 @@ namespace CodeBase.Player
             _input = input;
             _colliderChecking = GetComponent<ColliderChecking>();
             _rigidbody = GetComponent<Rigidbody2D>();
+            _climpUp = GetComponent<PlayerClimpUp>();
             _gravityHandler = new GravityHandler(_colliderChecking);
             _runPlayer = new RunPlayer(_colliderChecking);
             _input.Jump += Jump;
@@ -57,8 +60,11 @@ namespace CodeBase.Player
         private void MovePlayer() => 
             _rigidbody.MovePosition(_rigidbody.position + _direction * Time.fixedDeltaTime);
 
-        private void CheckDirection() => 
+        private void CheckDirection()
+        {
             _direction.x = _runPlayer.Run(_direction.x, _input.Axis.x, Speed);
+            _direction.y = _climpUp.MoveUp(_direction.y, _input.Axis.y, Speed);
+        }
 
         private void Jump()
         {

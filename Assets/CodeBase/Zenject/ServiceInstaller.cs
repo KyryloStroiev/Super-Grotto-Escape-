@@ -6,6 +6,8 @@ using CodeBase.Infrastructure.Service.Input;
 using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.SaveLoad;
 using CodeBase.Infrastructure.Service.StaticDataService;
+using CodeBase.UI.Service.Factory;
+using CodeBase.UI.Service.Menu;
 using Zenject;
 
 namespace CodeBase.Zenject
@@ -22,9 +24,25 @@ namespace CodeBase.Zenject
             SaveLoadServiceBind();
             StaticDataServiceBind();
             EnemyFactoryBind();
-            BulletEffectFactoryBind();
-
+            MenuServiceBind();
             ObjectPoolBind();
+            UIFactoryBind();
+        }
+
+        private void UIFactoryBind()
+        {
+            Container
+                .Bind<IUIFactory>()
+                .To<UIFactory>()
+                .AsSingle();
+        }
+
+        private void MenuServiceBind()
+        {
+            Container
+                .Bind<IMenuService>()
+                .To<MenuService>()
+                .AsSingle();
         }
 
         private void ObjectPoolBind()
@@ -35,14 +53,7 @@ namespace CodeBase.Zenject
                 .AsSingle();
         }
 
-        private void BulletEffectFactoryBind()
-        {
-            Container
-                .Bind<IBulletEffectFactory>()
-                .To<BulletEffectFactory>()
-                .AsSingle();
-        }
-
+    
         private void EnemyFactoryBind()
         {
             Container
