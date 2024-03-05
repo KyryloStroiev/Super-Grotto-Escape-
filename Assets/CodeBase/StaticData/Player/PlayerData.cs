@@ -22,5 +22,10 @@ namespace CodeBase.StaticData.Player
         public float JumpHeight = 4;
         [Range(1, 10)]
         public float MaxGravityMultiplier = 5;
+
+        [Header("Slide")] 
+        public float SlideDuration = 0.5f;
+
+        public float SlideSpeedMultiplier = 2f;
     }
 }

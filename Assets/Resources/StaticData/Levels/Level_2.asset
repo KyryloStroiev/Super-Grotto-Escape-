@@ -14,9 +14,130 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Level_2
   EnemySpawners:
-  - Id: _0c7e2d53-d396-419b-b341-b11e98c8ec1b
+  - Id: _6e56206c-f11d-4503-a1cd-3c2096e821be
+    MonsterTypeId: 1
+    Position: {x: -2, y: -3.9, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: -2.07, y: -1.1100001, z: 0}
+    EndPoint: {x: -2.07, y: -7.48, z: 0}
+  - Id: Level_2_4c0d6815-ea16-431b-9a7a-00b1410b3908
+    MonsterTypeId: 3
+    Position: {x: -18.56, y: 10.83, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: -20.849998, y: 10.77, z: 0}
+    EndPoint: {x: -16.55, y: 10.83, z: 0}
+  - Id: Level_2_640248b2-932c-4f92-89f0-cc5d332e33f1
+    MonsterTypeId: 1
+    Position: {x: -42.177242, y: 0.72355986, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_688d6296-32bf-4ea7-b1e7-a3da52562579
     MonsterTypeId: 0
-    Position: {x: -13.872551, y: -6.26831, z: 0}
-    StartPoint: {x: -17.24255, y: -6.26831, z: 0}
-    EndPoint: {x: -11.492551, y: -6.26831, z: 0}
-  InitialHeroPosition: {x: 6.68, y: -6.78, z: -0.33370686}
+    Position: {x: -28.857243, y: -7.2064404, z: 0}
+    IsLookLeft: 1
+    StartPoint: {x: -31.337242, y: -7.2064404, z: 0}
+    EndPoint: {x: -26.477242, y: -7.2064404, z: 0}
+  - Id: Level_2_5a57869c-445b-40a1-bbc9-f0ef05b42e0a
+    MonsterTypeId: 2
+    Position: {x: -35.237244, y: -4.1864405, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_bbf5e0c8-9544-4c0d-bbe9-658708b794a3
+    MonsterTypeId: 0
+    Position: {x: -40.917244, y: 6.883559, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: -45.31724, y: 6.823559, z: 0}
+    EndPoint: {x: -37.72724, y: 6.883559, z: 0}
+  - Id: Level_2_ee9044c6-a811-4877-aba2-02767972e547
+    MonsterTypeId: 0
+    Position: {x: -59.627243, y: 0.8335595, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_6de042cc-bf00-408a-b587-d33005c44dd3
+    MonsterTypeId: 3
+    Position: {x: -6.8500004, y: 0.6300001, z: 0}
+    IsLookLeft: 1
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_3506ab12-9119-4315-ac86-69efea44b316
+    MonsterTypeId: 0
+    Position: {x: -29.507242, y: 6.8360653, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: -32.50724, y: 6.776065, z: 0}
+    EndPoint: {x: -26.317242, y: 6.8360653, z: 0}
+  - Id: Level_2_401f5ab4-6588-4198-bb3f-e80ad6380236
+    MonsterTypeId: 2
+    Position: {x: -48.898247, y: -1.0520601, z: 0}
+    IsLookLeft: 1
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_b82091c1-0c24-4db8-ad15-4e1637b1c882
+    MonsterTypeId: 0
+    Position: {x: -13.427242, y: 6.74, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_d3e9b8a9-778f-4124-8742-73129e846c95
+    MonsterTypeId: 3
+    Position: {x: -22.93, y: 10.809999, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: -24.51, y: 10.809999, z: 0}
+    EndPoint: {x: -21.54, y: 10.809999, z: 0}
+  - Id: Level_2_43e8f52a-4e42-400b-8089-4270a571ccee
+    MonsterTypeId: 1
+    Position: {x: -23.407242, y: 2.4435596, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_3cedaad2-c03b-4d3f-9af5-dcfd7ace7e33
+    MonsterTypeId: 1
+    Position: {x: -12.49, y: -16.58, z: 0}
+    IsLookLeft: 1
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_33ad011f-39a8-4120-87cc-73395fa87612
+    MonsterTypeId: 3
+    Position: {x: 1.8900013, y: 0.6300001, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_d779165e-e1e2-4313-a8cd-754232bc1410
+    MonsterTypeId: 2
+    Position: {x: -9.537241, y: -7.2264404, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_006b2c6f-3d7b-4e33-a70d-b74877988cc0
+    MonsterTypeId: 2
+    Position: {x: -4.8972416, y: 10.683559, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_b7579e9d-41e6-4e39-abcc-894280ed1fbb
+    MonsterTypeId: 0
+    Position: {x: -58.267242, y: 11.71356, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_fafe9cb7-86ad-497d-a0b7-d4a079a56167
+    MonsterTypeId: 0
+    Position: {x: -19.797241, y: -11.326441, z: 0}
+    IsLookLeft: 1
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_29de771d-456c-4000-8e84-48ad955da4de
+    MonsterTypeId: 2
+    Position: {x: 5.0627575, y: 10.683559, z: 0}
+    IsLookLeft: 1
+    StartPoint: {x: 0, y: 0, z: 0}
+    EndPoint: {x: 0, y: 0, z: 0}
+  - Id: Level_2_30fd260e-e52a-4e76-a6a0-5385f9007e78
+    MonsterTypeId: 3
+    Position: {x: -26.87, y: 10.809999, z: 0}
+    IsLookLeft: 0
+    StartPoint: {x: -28.45, y: 10.809999, z: 0}
+    EndPoint: {x: -25.480001, y: 10.809999, z: 0}
+  InitialHeroPosition: {x: 6.9, y: -6.78, z: -0.33370686}

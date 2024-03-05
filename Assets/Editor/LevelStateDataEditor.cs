@@ -27,6 +27,7 @@ namespace Editor
                         new EnemySpawnerData(
                             x.GetComponent<UniqueId>().Id,
                             x.MonsterTypeId,
+                            x.IsLookLeft,
                             x.transform.position,
                             x.StartPoint != null ? x.StartPoint.transform.position : Vector3.zero,
                             x.EndPoint != null ? x.EndPoint.transform.position : Vector3.zero))

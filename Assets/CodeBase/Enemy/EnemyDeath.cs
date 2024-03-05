@@ -25,7 +25,6 @@ namespace CodeBase.Enemy
 
         private void HealtChanged()
         {
-            Debug.Log(_health.CurrentHP);
             if(_health.CurrentHP <= 0)
                 Die();
         }

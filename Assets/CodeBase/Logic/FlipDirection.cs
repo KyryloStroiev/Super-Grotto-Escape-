@@ -7,18 +7,27 @@ namespace CodeBase.Logic
     {
         public bool IsFacingRight = true;
         
-        protected void CheckDirection(float horizontalVelosity)
+        protected void CheckDirection(float horizontalVelocity)
         {
-            if (horizontalVelosity> 0 && !IsFacingRight)
+            if (horizontalVelocity > 0 && !IsFacingRight || horizontalVelocity < 0 && IsFacingRight )
             {
                 Flip();
             }
-            else if (horizontalVelosity < 0 && IsFacingRight)
+            
+            /*if (!isLookLeft)
             {
-                Flip();
+               
             }
+            else
+            {
+                if (horizontalVelocity < 0 && !IsFacingRight || horizontalVelocity > 0 && IsFacingRight)
+                {
+                    Flip();
+                }
+            }*/
+           
         }
-        protected void Flip()
+        public void Flip()
         {
             IsFacingRight = !IsFacingRight;
 

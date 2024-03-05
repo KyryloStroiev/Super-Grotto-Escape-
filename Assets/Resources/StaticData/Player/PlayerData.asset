@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   Player: Player
-  MaxHP: 8
+  MaxHP: 100
   Damage: 5
   Speed: 7
-  JumpHeight: 4
+  JumpHeight: 9
   MaxGravityMultiplier: 5
+  SlideDuration: 0.5
+  SlideSpeedMultiplier: 2

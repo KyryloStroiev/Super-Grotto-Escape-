@@ -13,10 +13,10 @@ namespace CodeBase.Infrastructure.Factory.EnemyFactory
         List<ISavedProgress> ProgressWriters { get; }
         void Cleanup();
 
-        Task<GameObject> CreateMonster(MonsterTypeId typeId, Transform parent, Vector3 startPointPosition,
+        Task<GameObject> CreateMonster(MonsterTypeId typeId, Transform parent, bool isLookLeft, Vector3 startPointPosition,
             Vector3 endPointPosition);
 
-        Task CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId,
+        Task CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId, bool isLookLeft,
             Vector3 startPointPosition, Vector3 endPointPosition);
 
         Task WarmUp();

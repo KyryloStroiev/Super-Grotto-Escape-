@@ -17,6 +17,8 @@ namespace CodeBase.Logic.EnemySpawners
         
         public MonsterTypeId MonsterTypeId;
 
+        public bool IsLookLeft;
+        
         public Vector3 StartPoint;
         public Vector3 EndPoint;
 
@@ -44,7 +46,7 @@ namespace CodeBase.Logic.EnemySpawners
 
         private async void Spawn()
         {
-            GameObject monster = await _enemyFactory.CreateMonster(MonsterTypeId, transform,
+            GameObject monster = await _enemyFactory.CreateMonster(MonsterTypeId, transform, IsLookLeft,
                 StartPoint, EndPoint);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();

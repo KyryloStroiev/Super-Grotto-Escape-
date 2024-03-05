@@ -15,12 +15,15 @@ namespace CodeBase.Enemy
         
         private EnemyMove _move;
         private EnemyAnimator _animator;
+        private EnemySound _enemySound;
 
         private void Start()
         {
             _move = GetComponent<EnemyMove>();
             _animator = GetComponent<EnemyAnimator>();
+            _enemySound = GetComponent<EnemySound>();
             _currentTarget = StartPoint;
+         
         }
 
         private void Update() => 
@@ -33,6 +36,7 @@ namespace CodeBase.Enemy
                 _move.Move(_currentTarget);
             }
             _animator.PlayMove(_isEnable);
+            
         }
 
         private void PatrolRange()
@@ -50,8 +54,14 @@ namespace CodeBase.Enemy
         private void SwitchTarget() => 
            _currentTarget = (_currentTarget == StartPoint) ? EndPoint : StartPoint;
 
-        public void Enable() => _isEnable = true;
+        public void Enable()
+        {
+            _isEnable = true;
+        }
 
-        public void Disable() => _isEnable = false;
+        public void Disable()
+        {
+            _isEnable = false;
+        }
     }
 }

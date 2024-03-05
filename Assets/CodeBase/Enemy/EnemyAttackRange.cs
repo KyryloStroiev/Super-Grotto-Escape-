@@ -20,6 +20,7 @@ namespace CodeBase.Enemy
 
         private IObjectPool _objectPool;
         private EnemyFlipDirection _flip;
+        private EnemyPlayerChecking _playerChecking;
         private EnemyAnimator _animator;
         private Vector2 _direction;
 
@@ -29,11 +30,17 @@ namespace CodeBase.Enemy
             _objectPool = objectPool;
             _animator = GetComponent<EnemyAnimator>();
             _flip = GetComponent<EnemyFlipDirection>();
+            _playerChecking = GetComponent<EnemyPlayerChecking>();
         }
 
         private void Update()
         {
             UpdateCooldown();
+            
+            if (_playerChecking.PlayerBack())
+            {
+                _flip.Flip();
+            }
             
             if (CanAttack())
             {
@@ -45,11 +52,10 @@ namespace CodeBase.Enemy
         private void OnAttack()
         {
             _direction = _flip.IsFacingRight ? Vector2.right : Vector2.left;
-          
             GameObject bullet = _objectPool.GetPooledObject(AssetsAdress.EnemyBullet, ShootPoint.position);
             bullet.GetComponent<Bullet>().StartShoot(_direction, Damage);   
         }
-
+        
         private void OnAttackEnded()
         {
             _attackCooldown = Cooldown;

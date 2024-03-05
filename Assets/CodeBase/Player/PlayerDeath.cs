@@ -35,7 +35,6 @@ namespace CodeBase.Player
             _isDead = true;
             _animator.PlayDie();
             _playerMovement.enabled = false;
-            
             var position = new Vector3(transform.position.x, transform.position.y +0.8f, transform.position.z);
             GameObject explossion = Instantiate(DeathExplossion, position, Quaternion.identity);
             Destroy(explossion, 1f);

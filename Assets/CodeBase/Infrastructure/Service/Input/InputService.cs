@@ -9,6 +9,7 @@ namespace CodeBase.Infrastructure.Service
         private PlayerInput _input;
         public event Action Shoot;
         public event Action Jump;
+        public event Action Slide;
 
 
         public InputService()
@@ -17,20 +18,19 @@ namespace CodeBase.Infrastructure.Service
             _input?.Enable();
             _input.Player.Jump.performed +=_=> Jump?.Invoke();
             _input.Player.Shoot.performed += _ => Shoot?.Invoke();
+            _input.Player.Slide.performed += _ => Slide?.Invoke();
         }
         
         public Vector2 Axis => 
             _input.Player.Move.ReadValue<Vector2>();
         
         
-
-       
-
         private void OnDisable()
         {
             _input?.Disable();
             _input.Player.Jump.performed -=_=> Jump?.Invoke();
             _input.Player.Shoot.performed -= _ => Shoot?.Invoke();
+            _input.Player.Slide.performed -= _ => Slide?.Invoke();
         }
     }
 }

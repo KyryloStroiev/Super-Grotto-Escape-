@@ -9,5 +9,7 @@ namespace CodeBase.Infrastructure.Service.Input
 
         event Action Shoot;
         event Action Jump;
+
+        event Action Slide;
     }
 }

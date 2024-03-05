@@ -100,7 +100,7 @@ namespace CodeBase.Infrastructure.State
         {
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
                await _enemyFactory.CreateSpawner(spawnerData.Position, spawnerData.Id, 
-                   spawnerData.MonsterTypeId, spawnerData.StartPoint, spawnerData.EndPoint);
+                   spawnerData.MonsterTypeId, spawnerData.IsLookLeft, spawnerData.StartPoint, spawnerData.EndPoint);
         }
 
         private async Task InitHud(GameObject hero)
@@ -126,8 +126,9 @@ namespace CodeBase.Infrastructure.State
 
         private static void CameraFollow(GameObject hero)
         {
-            Camera.main
-                .GetComponentInChildren<CameraFollow>().Follow(hero);
+            CameraFollow cameraFollow = Camera.main.GetComponentInChildren<CameraFollow>();
+            cameraFollow.Construct(hero);
+            cameraFollow.Follow();
         }
 
         private LevelStaticData LevelStaticData() => 

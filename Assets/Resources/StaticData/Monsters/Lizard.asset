@@ -19,7 +19,7 @@ MonoBehaviour:
   Cooldown: 1.5
   MinDistanceToAttack: 1
   DistanceForward: 12
-  DistanceBack: 0.1
+  DistanceBack: 2
   IsFlying: 0
   PrefabReferenc:
     m_AssetGUID: 38772b71fd6efe94e878041a94e2a3f9

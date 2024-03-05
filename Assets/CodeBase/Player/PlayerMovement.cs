@@ -1,13 +1,11 @@
 using System;
+using System.Collections;
 using CodeBase.Data;
-using CodeBase.Infrastructure.Service;
 using CodeBase.Infrastructure.Service.Input;
 using CodeBase.Infrastructure.Service.PersistentProgress;
-using Unity.VisualScripting;
+using CodeBase.StaticData.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using Zenject;
 
 namespace CodeBase.Player
 {
@@ -16,24 +14,27 @@ namespace CodeBase.Player
     {
         public float Speed { get; set; }
         public float JumpHeight { get; set; }
+        public float SlideDuration { get; set; }
+        public float SlideSpeedMultiplier { get; set; }
         public float MaxGravityMultiplier { get; set; } //Додати в код 
-         
+        
         private const float Gravity = -9.81f;
 
-        private Vector2 _direction;
-        public float HorizontalVelocity => _direction.x;
-        
+        private Vector2 _direction; 
         private bool _isJumping;
+        public float HorizontalVelocity => _direction.x;
         public bool IsJumping => _isJumping;
         public float VerticalVelocity => _direction.y;
 
         private IInputService _input;
         private RunPlayer _runPlayer;
+        private PlayerSlide _playerSlide;
         private ColliderChecking _colliderChecking;
         private GravityHandler _gravityHandler;
         private PlayerClimpUp _climpUp;
-        
+        private PlayerSounds _playerSounds;
         private Rigidbody2D _rigidbody;
+        public bool IsSliding { get; set; }
         
         public void Construct(IInputService input)
         {
@@ -41,19 +42,29 @@ namespace CodeBase.Player
             _colliderChecking = GetComponent<ColliderChecking>();
             _rigidbody = GetComponent<Rigidbody2D>();
             _climpUp = GetComponent<PlayerClimpUp>();
+            _playerSounds = GetComponent<PlayerSounds>();
             _gravityHandler = new GravityHandler(_colliderChecking);
             _runPlayer = new RunPlayer(_colliderChecking);
+            _playerSlide = new PlayerSlide(this);
             _input.Jump += Jump;
+            _input.Slide += Slide;
         }
-        
 
         private void Update()
         {
             CheckDirection();
             ApplyGravity();
-        }
+            if (_isJumping)
+            {
+                _direction.y += Gravity * Time.deltaTime;
+            }
 
-      
+            if (!_colliderChecking.isGround && !_colliderChecking.IsLadder)
+            {
+                _isJumping = true;
+            }
+        }
+        
         private void FixedUpdate() => 
             MovePlayer();
 
@@ -72,9 +83,15 @@ namespace CodeBase.Player
             {
                 _direction.y = (float)Math.Sqrt(JumpHeight * -1f * Gravity);
                 _isJumping = true;
+                _playerSounds.PlayOneShot(PlayerSoundType.Jump);
             }
         }
-        
+
+       
+
+        private void Slide() => 
+            _playerSlide.Slide(SlideSpeedMultiplier, SlideDuration);
+
         private void ApplyGravity() => 
             _gravityHandler.ApplyGravity(ref _direction, ref _isJumping);
 
@@ -98,7 +115,10 @@ namespace CodeBase.Player
         private static string CurrentLevel() => 
             SceneManager.GetActiveScene().name;
 
-        private void OnDestroy() => 
+        private void OnDisable()
+        {
+            _input.Slide -= Slide;
             _input.Jump -= Jump;
+        }
     }
 }

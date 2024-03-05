@@ -24,7 +24,7 @@ namespace CodeBase.Player
                 
                 if (direction.y < 0 && _colliderChecking.isGround)
                 {
-                    direction.y = -2f;
+                    direction.y = -2;
                     isJumping = false;
                 }
                 else if (_colliderChecking.isObstacleUp & !_colliderChecking.IsLadder)

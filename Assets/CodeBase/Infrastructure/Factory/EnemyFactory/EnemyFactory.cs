@@ -5,12 +5,8 @@ using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Service.Input;
 using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.StaticDataService;
-using CodeBase.Infrastructure.State;
-using CodeBase.Logic;
 using CodeBase.Logic.EnemySpawners;
-using CodeBase.StaticData;
 using CodeBase.StaticData.Enemy;
-using CodeBase.UI;
 using CodeBase.UI.Service.Menu;
 using UnityEngine;
 
@@ -33,18 +29,24 @@ namespace CodeBase.Infrastructure.Factory.EnemyFactory
         public async Task WarmUp() => 
             await _assets.Load<GameObject>(AssetsAdress.Spawner);
 
-        public async Task<GameObject> CreateMonster(MonsterTypeId typeId, Transform parent, Vector3 startPointPosition,
+        public async Task<GameObject> CreateMonster(MonsterTypeId typeId, Transform parent, bool isLookLeft, Vector3 startPointPosition,
             Vector3 endPointPosition)
         {
             MonsterStaticData monsterData = _staticData.ForMonster(typeId);
             GameObject prefab = await _assets.Load<GameObject>(monsterData.PrefabReferenc);
             GameObject monster = InstantiateRegistered(prefab, parent.position);
-
+            
             MonsterBuilder monsterBuilder = new MonsterBuilder(monster);
             monsterBuilder.SetHealth(monsterData.HP)
                           .SetMove(monsterData.Speed, monsterData.IsFlying)
                           .SetPlayerCheckingDistances(monsterData.DistanceForward, monsterData.DistanceBack)
                           .SetObjectPool(_objectPool);
+
+            EnemyFlipDirection monsterFlip = monster.GetComponent<EnemyFlipDirection>();
+            monsterFlip.Construct(isLookLeft);
+            if (isLookLeft) 
+                monster.transform.rotation = Quaternion.Euler(0, 180, 0);
+
 
             if (monster.GetComponent<EnemyAttackMelee>() != null)
             {
@@ -73,9 +75,9 @@ namespace CodeBase.Infrastructure.Factory.EnemyFactory
                 monster.GetComponent<EnemyStateMachine>().IsIdlieState = true;
             }
         }
-        
 
-        public async Task CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId, Vector3 startPointPosition, Vector3 endPointPosition)
+        
+        public async Task CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId, bool isLookLeft, Vector3 startPointPosition, Vector3 endPointPosition)
         {
             var prefab = await _assets.Load<GameObject>(AssetsAdress.Spawner);
             
@@ -85,6 +87,7 @@ namespace CodeBase.Infrastructure.Factory.EnemyFactory
             spawner.EndPoint = endPointPosition;
             spawner.Id = spawnerId;
             spawner.MonsterTypeId = monsterTypeId;
+            spawner.IsLookLeft = isLookLeft;
         }
 
     }

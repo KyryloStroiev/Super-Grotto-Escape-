@@ -1,6 +1,4 @@
-﻿using System;
-using CodeBase.Logic;
-using UnityEngine;
+﻿using CodeBase.Logic;
 
 namespace CodeBase.Enemy
 {
@@ -8,6 +6,10 @@ namespace CodeBase.Enemy
     {
         private EnemyMove _move;
 
+        public void Construct(bool isLookLeft)
+        {
+            IsFacingRight = !isLookLeft;
+        }
         private void Awake() => 
             _move = GetComponent<EnemyMove>();
 

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d24049a05e1d4e42814d0d1e951273ec, type: 3}
+  m_Name: EnemySound
+  m_EditorClassIdentifier: 
+  BatFlySound: {fileID: 8300000, guid: 6417c0edab8ce834290f9d4c5db4170b, type: 3}
+  SkeletPatrolSound: {fileID: 8300000, guid: 3540e089fbffcdf4da78198cfcb9919c, type: 3}
+  Fireball: {fileID: 8300000, guid: c36e6fa7609c67443a32832252f72e93, type: 3}

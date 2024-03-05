@@ -47,6 +47,11 @@ namespace CodeBase.Infrastructure.Factory
             playerMovement.Speed = playerData.Speed;
             playerMovement.JumpHeight = playerData.JumpHeight;
             playerMovement.MaxGravityMultiplier = playerData.MaxGravityMultiplier;
+            playerMovement.SlideDuration = playerData.SlideDuration;
+            playerMovement.SlideSpeedMultiplier = playerData.SlideSpeedMultiplier;
+            
+            playerGameObject.GetComponent<PlayerLookUpDown>().Construct(_inputService);
+            playerGameObject.GetComponent<PlayerCrouch>().Construct(_inputService);
             
             return playerGameObject;
         }

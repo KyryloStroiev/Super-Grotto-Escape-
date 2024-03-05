@@ -8,7 +8,7 @@ namespace CodeBase.Logic.EnemySpawners
     {
         public GameObject StartPoint;
         public GameObject EndPoint;
-        
+        public bool IsLookLeft;
         public MonsterTypeId MonsterTypeId;
     }
 }

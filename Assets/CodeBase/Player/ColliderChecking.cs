@@ -5,7 +5,7 @@ namespace CodeBase.Player
     [RequireComponent(typeof(BoxCollider2D))]
     public class ColliderChecking : MonoBehaviour
     {
-        private const string LayerGround = "Ground";
+        [SerializeField] private LayerMask _ground;
         private const string LayerLadder = "Ladder";
         public BoxCollider2D BoxCollider;
         
@@ -26,13 +26,12 @@ namespace CodeBase.Player
 
         private void Awake()
         {
-            _layerMaskGround = 1 << LayerMask.NameToLayer(LayerGround);
             _layerMaskLadder = 1 << LayerMask.NameToLayer(LayerLadder);
         }
         
         private void Update()
         {
-            isGround = CheckGround(_layerMaskGround);
+            isGround = CheckGround(_ground);
             isObstacleUp = CheckCollision(Vector2.up, BoxCollider.bounds.size.y * 0.5f);
             isObstacleLeft = CheckCollision(Vector2.left, BoxCollider.bounds.size.x * 0.5f);
             isObstacleRight = CheckCollision(Vector2.right, BoxCollider.bounds.size.x * 0.5f);
@@ -44,7 +43,7 @@ namespace CodeBase.Player
         {
             Vector2 playerCenter = (Vector2)transform.position + BoxCollider.offset;
             Vector2 raycastOrigin = playerCenter + raycastDirection * (rendererExtents + 0.01f);
-            RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, _layerMaskGround);
+            RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, _ground);
             Debug.DrawRay(raycastOrigin, raycastDirection * raycastDistance, Color.red);
             return hit;
         }
