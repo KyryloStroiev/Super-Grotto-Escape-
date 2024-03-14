@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: EnemySound
   m_EditorClassIdentifier: 
   BatFlySound: {fileID: 8300000, guid: 6417c0edab8ce834290f9d4c5db4170b, type: 3}
-  SkeletPatrolSound: {fileID: 8300000, guid: 3540e089fbffcdf4da78198cfcb9919c, type: 3}
+  SkeletPatrolSound: {fileID: 8300000, guid: a94a4f798729c8a47b688cd758acc46e, type: 3}
+  SkeletAggroSound: {fileID: 8300000, guid: 262c80be81b7bee4a810daa12b9681f5, type: 3}
+  SkeletAtaackSound: {fileID: 8300000, guid: 1f1ef7b1a1d3efd4e989597f8376d5d1, type: 3}
   Fireball: {fileID: 8300000, guid: c36e6fa7609c67443a32832252f72e93, type: 3}
+  Explosion: {fileID: 8300000, guid: 0fbe931d7c2d13a4b8fe4c8ddbe2cccd, type: 3}

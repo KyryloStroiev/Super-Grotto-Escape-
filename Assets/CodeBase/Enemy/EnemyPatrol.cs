@@ -1,5 +1,7 @@
+using System;
 using CodeBase.Enemy.EnemyState;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CodeBase.Enemy
 {
@@ -11,17 +13,21 @@ namespace CodeBase.Enemy
         private Vector3 _direction;
         private Vector3 _currentTarget;
 
-        private bool _isEnable = false;
+        public bool IsEnable { get; set; }
         
         private EnemyMove _move;
         private EnemyAnimator _animator;
         private EnemySound _enemySound;
 
-        private void Start()
+        private void Awake()
         {
             _move = GetComponent<EnemyMove>();
             _animator = GetComponent<EnemyAnimator>();
             _enemySound = GetComponent<EnemySound>();
+        }
+
+        private void Start()
+        {
             _currentTarget = StartPoint;
          
         }
@@ -31,12 +37,8 @@ namespace CodeBase.Enemy
         
         private void FixedUpdate()
         {
-            if (_isEnable)
-            {
-                _move.Move(_currentTarget);
-            }
-            _animator.PlayMove(_isEnable);
-            
+            _move.Move(_currentTarget);
+            _animator.PlayMove(IsEnable);
         }
 
         private void PatrolRange()
@@ -56,12 +58,16 @@ namespace CodeBase.Enemy
 
         public void Enable()
         {
-            _isEnable = true;
+            IsEnable = true;
+            enabled = true;
+            _enemySound.PlayPatrolSound();
+            
         }
 
         public void Disable()
         {
-            _isEnable = false;
+            IsEnable = false;
+            enabled = false;
         }
     }
 }

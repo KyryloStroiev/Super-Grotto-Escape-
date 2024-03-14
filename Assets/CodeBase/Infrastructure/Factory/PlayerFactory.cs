@@ -20,6 +20,7 @@ namespace CodeBase.Infrastructure.Factory
         private IInputService _inputService;
         private readonly IObjectPool _objectPool;
         private readonly IMenuService _menuService;
+        private IGameStateMachine _gameStateMachine;
 
         public PlayerFactory(IAssetProvider assets, IStaticDataService staticData, IInputService inputService, IObjectPool objectPool, IMenuService menuService) :
             base(assets, staticData, inputService, objectPool, menuService)
@@ -30,7 +31,10 @@ namespace CodeBase.Infrastructure.Factory
             _objectPool = objectPool;
             _menuService = menuService;
         }
-        
+
+        public void Construct(IGameStateMachine gameStateMachine) => 
+            _gameStateMachine = gameStateMachine;
+
         public async Task<GameObject> CreateHero(Vector3 at)
         {
             GameObject prefab = await _assets.Load<GameObject>(AssetsAdress.Player);
@@ -52,6 +56,7 @@ namespace CodeBase.Infrastructure.Factory
             
             playerGameObject.GetComponent<PlayerLookUpDown>().Construct(_inputService);
             playerGameObject.GetComponent<PlayerCrouch>().Construct(_inputService);
+            playerGameObject.GetComponent<PlayerDeath>().Construct(_gameStateMachine);
             
             return playerGameObject;
         }

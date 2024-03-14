@@ -9,16 +9,12 @@ namespace CodeBase.Enemy.EnemyState
         
         private List<IEnemyState> _states;
         private EnemyPlayerChecking _checking;
-        private EnemyAggro _enemyAggro;
-        private EnemyAttackRange _enemyAttackRange;
-
-
+        private IEnemyState _activeState;
+        
         private void Awake()
         {
             _checking = GetComponent<EnemyPlayerChecking>();
-            _enemyAggro = GetComponent<EnemyAggro>();
-            _enemyAttackRange = GetComponent<EnemyAttackRange>();
-
+            
             _states = new List<IEnemyState>();
             AddState<EnemyPatrol>();
             AddState<EnemyIdlie>();
@@ -36,14 +32,15 @@ namespace CodeBase.Enemy.EnemyState
         {
             IEnemyState newState = FindMatchingState();
 
-            if (newState != null)
+            if (_activeState == newState)
+            { 
+                return;
+            }
+            else if (newState != null)
             {
                 EnableState(newState);
             }
-            else
-            {
-                EnableState<EnemyPatrol>();
-            }
+            
         }
 
         private IEnemyState FindMatchingState()
@@ -51,6 +48,10 @@ namespace CodeBase.Enemy.EnemyState
             foreach (IEnemyState state in _states)
             {
                 if (state is EnemyIdlie && IsIdlieState && PlayerNotFound())
+                {
+                    return state;
+                }
+                else if (state is EnemyPatrol && PlayerNotFound() && !IsIdlieState)
                 {
                     return state;
                 }
@@ -66,16 +67,10 @@ namespace CodeBase.Enemy.EnemyState
             return null;
         }
         
-        private void EnableState<TState>() where TState : IEnemyState
-        {
-            DisableAllState();
-            var state = _states.Find(x => x is TState);
-            state?.Enable();
-        }
-        
         private void EnableState(IEnemyState state)
         {
             DisableAllState();
+            _activeState = state;
             state?.Enable();
         }
 
@@ -98,7 +93,7 @@ namespace CodeBase.Enemy.EnemyState
                 _states.Add(component);
             }
         }
-
+        
         private bool PlayerFound() => 
             _checking.IsPlayerFound;
 

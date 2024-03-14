@@ -3,10 +3,12 @@
     public enum LevelId
     {
         Initial = 0,
-        Level_1 = 1,
-        Level_2 = 2,
-        Level_3 = 3,
-        Level_4 = 4,
-        Level_5 = 5,
+        Start = 1,
+        Level_1 = 2,
+        Level_2 = 3,
+        Level_3 = 4,
+        Level_4 = 5,
+        Level_5 = 6,
+        Finish = 7,
     }
 }

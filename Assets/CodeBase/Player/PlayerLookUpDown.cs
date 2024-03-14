@@ -9,13 +9,10 @@ namespace CodeBase.Player
         private IInputService _inputService; 
         private ColliderChecking _colliderChecking;
         public bool IsLookingUp;
-        private PlayerMovement _movement;
         
-
         private void Awake()
         {
             _colliderChecking = GetComponent<ColliderChecking>();
-            _movement = GetComponent<PlayerMovement>();
         }
 
         public void Construct(IInputService inputService)

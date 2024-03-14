@@ -12,9 +12,11 @@ namespace CodeBase.Enemy
     {
         public float Damage { get; set; }
         public float Cooldown { get; set; }
-
+        
         public Transform AttackPoint;
 
+        public EnemySoundType AttackSound;
+        
         private float _cleavage = 0.5f;
 
         private const string LayerName = "Player";
@@ -23,12 +25,14 @@ namespace CodeBase.Enemy
         private int _layerMask;
 
         private EnemyAnimator _animator;
+        private EnemySound _sound;
         private Collider2D[] _hits = new Collider2D[1];
 
         private void Awake()
         {
             _layerMask = 1 << LayerMask.NameToLayer(LayerName);
             _animator = GetComponent<EnemyAnimator>();
+            _sound = GetComponent<EnemySound>();
         }
 
         private void Update() =>
@@ -39,6 +43,7 @@ namespace CodeBase.Enemy
             if (CanAttack())
             {
                 _animator.PlayAttack();
+               
                 _isAttacking = true;
             }
         }
@@ -48,7 +53,7 @@ namespace CodeBase.Enemy
             if (Hit(out Collider2D hit))
             {
                 hit.transform.GetComponent<IHealth>().TakeDamage(Damage);
-
+                _sound.PlayOneShot(AttackSound);
                 PhysicsDebug.DrawDebug(AttackPoint.position, _cleavage, 2);
             }
         }

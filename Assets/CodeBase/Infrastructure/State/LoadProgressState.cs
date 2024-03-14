@@ -45,7 +45,7 @@ namespace CodeBase.Infrastructure.State
 
         private PlayerProgress NewProgress()
         {
-          PlayerProgress progress = new PlayerProgress(initialLevel: LevelId.Level_3.ToString());
+          PlayerProgress progress = new PlayerProgress(initialLevel: LevelId.Start.ToString());
           PlayerData playerData = _staticData.ForPlayer(AssetsAdress.Player);
           progress.PlayerState.MaxHP = playerData.MaxHP;
           progress.PlayerState.CurrentHP = playerData.MaxHP;

@@ -39,6 +39,7 @@ namespace CodeBase.Infrastructure.State
             _enemyFactory = enemyFactory;
             _objectPool = objectPool;
             _uiFactory = uiFactory;
+            _playerFactory.Construct(this);
         }
 
         public void CreateAllState(SceneLoader sceneLoader, LoadingCurtain curtain)
@@ -52,6 +53,7 @@ namespace CodeBase.Infrastructure.State
                 [typeof(GameLoopState)] = new GameLoopState(this),
                 
             };
+            
         }
 
         public void Enter<TState>() where TState : class, IState

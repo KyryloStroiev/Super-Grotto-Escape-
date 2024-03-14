@@ -12,6 +12,7 @@ namespace CodeBase.Enemy
 
         private EnemyHealth _health;
         private IObjectPool _objectPool;
+        private EnemySound _sound;
 
         public void Construct(IObjectPool objectPool)
         {
@@ -20,6 +21,7 @@ namespace CodeBase.Enemy
         private void Start()
         {
             _health = GetComponent<EnemyHealth>();
+            _sound = GetComponent<EnemySound>();
             _health.HealthChanged += HealtChanged;
         }
 
@@ -32,6 +34,7 @@ namespace CodeBase.Enemy
         private void Die()
         {
             _objectPool.GetPooledObject(AssetsAdress.ExplosionSmall, transform.position);
+            _sound.PlayOneShot(EnemySoundType.Explosion);
             Died?.Invoke();
             Destroy(gameObject);
         }

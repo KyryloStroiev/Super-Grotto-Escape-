@@ -35,7 +35,7 @@ namespace CodeBase.Player
         private void OnAttack()
         {
             Vector2 direction = _flip.IsFacingRight ? Vector2.right : Vector2.left;
-            _playerSounds.PlayOneShot(PlayerSoundType.Shot);
+            _playerSounds.PlayOneSound(PlayerSoundType.Shot);
             GameObject bullet = _objectPool.GetPooledObject(AssetsAdress.PlayerBullet, shootPoint.position);
             bullet.GetComponent<Bullet>().StartShoot(direction, Damage);
            

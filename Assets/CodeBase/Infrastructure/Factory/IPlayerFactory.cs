@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeBase.Infrastructure.Service.PersistentProgress;
+using CodeBase.Infrastructure.State;
 using CodeBase.StaticData;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ namespace CodeBase.Infrastructure.Factory
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }
         void Cleanup();
-        
+
+        void Construct(IGameStateMachine gameStateMachine);
+
     }
 }

@@ -4,5 +4,7 @@
     {
         void Enable();
         void Disable();
+        
+        bool IsEnable { get; set; }
     }
 }

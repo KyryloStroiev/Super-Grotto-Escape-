@@ -16,7 +16,7 @@ MonoBehaviour:
   MaxHP: 100
   Damage: 5
   Speed: 7
-  JumpHeight: 9
+  JumpHeight: 9.5
   MaxGravityMultiplier: 5
   SlideDuration: 0.5
   SlideSpeedMultiplier: 2

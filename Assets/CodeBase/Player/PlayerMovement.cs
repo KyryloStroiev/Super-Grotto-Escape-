@@ -83,7 +83,7 @@ namespace CodeBase.Player
             {
                 _direction.y = (float)Math.Sqrt(JumpHeight * -1f * Gravity);
                 _isJumping = true;
-                _playerSounds.PlayOneShot(PlayerSoundType.Jump);
+                _playerSounds.PlayOneSound(PlayerSoundType.Jump);
             }
         }
 

@@ -4,6 +4,10 @@
     {
         BatFly,
         SkeletPatrol,
-        Fireball
+        SkeletAggro,
+        SkeletAttack,
+        Fireball,
+        Explosion,
+        
     }
 }

@@ -14,7 +14,7 @@ namespace CodeBase.Enemy
         public float Damage { get; set; }
         public float Cooldown { get; set; }
         
-        private bool _isEnable;
+        public bool IsEnable { get; set; }
         private float _attackCooldown;
         private bool _isAttacking;
 
@@ -72,10 +72,10 @@ namespace CodeBase.Enemy
             _attackCooldown <= 0;
         
         private bool CanAttack() =>
-            !_isAttacking && CooldownIsUp() && _isEnable;
+            !_isAttacking && CooldownIsUp() && IsEnable;
         
-        public void Enable() => _isEnable = true;
+        public void Enable() => IsEnable = true;
 
-        public void Disable() => _isEnable = false;
+        public void Disable() => IsEnable = false;
     }
 }

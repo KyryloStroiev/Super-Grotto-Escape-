@@ -9,36 +9,40 @@ namespace CodeBase.Enemy
     {
         public float MinDistanceToAttack { get; set; }
         
-        private bool _isEnable;
+        public bool IsEnable { get; set; }
 
         private EnemyPlayerChecking _checking;
         private EnemyMove _move;
         private EnemyAnimator _animator;
         private EnemyAttackMelee _attack;
+        private EnemySound _sound;
         private void Start()
         {
             _move = GetComponent<EnemyMove>();
             _checking = GetComponent<EnemyPlayerChecking>();
             _animator = GetComponent<EnemyAnimator>();
             _attack = GetComponent<EnemyAttackMelee>();
+            _sound = GetComponent<EnemySound>();
         }
         
         private void Update()
         {
-            if (_isEnable && IsCloseToPlayer() ) 
+            if (IsEnable && IsCloseToPlayer() ) 
                 MoveToPlayer();
 
             Attack();
             
-            _animator.PlayAggroMove(_isEnable && IsCloseToPlayer());
+            _animator.PlayAggroMove(IsEnable && IsCloseToPlayer());
         }
 
-        private void MoveToPlayer() => 
+        private void MoveToPlayer()
+        {
             _move.Move(PlayerPosition());
+        }
 
         private void Attack()
         {
-            if (_isEnable && !IsCloseToPlayer())
+            if (IsEnable && !IsCloseToPlayer())
             {
                 _attack.StartAttack();
             }
@@ -50,9 +54,13 @@ namespace CodeBase.Enemy
             return (distanceToTarget >= MinDistanceToAttack);
         }
 
-        public void Enable() => _isEnable = true;
+        public void Enable()
+        {
+            IsEnable = true;
+           _sound.PlayAggroSound();
+        }
 
-        public void Disable() => _isEnable = false;
+        public void Disable() => IsEnable = false;
 
         private Vector3 PlayerPosition() => 
             _checking.Hit.collider.transform.position;

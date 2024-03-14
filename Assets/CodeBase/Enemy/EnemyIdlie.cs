@@ -14,5 +14,7 @@ namespace CodeBase.Enemy
         {
            
         }
+        
+        public bool IsEnable { get; set; }
     }
 }

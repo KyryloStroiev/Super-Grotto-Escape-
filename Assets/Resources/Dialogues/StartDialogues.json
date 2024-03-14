@@ -1,0 +1,34 @@
+{
+  "Dialogues": [
+    {
+      "sentences": [
+        "ATTENTION: THE ELEVATOR IS OUT OF ORDER"
+      ]
+    },
+    {
+      "sentences": [
+        "USE THE EMERGENCY EXIT"
+      ]
+    },
+    {
+      "sentences": [
+        "OPEN THE DOOR..."
+      ]
+    },
+    {
+      "sentences": [
+        "ERROR: NOT ENOUGH POWER"
+      ]
+    },
+    {
+      "sentences": [
+        "EMERGENCY BATTERIES ARE REQUIRED"
+      ]
+    },
+    {
+      "sentences": [
+        ""
+      ]
+    }
+  ]
+}

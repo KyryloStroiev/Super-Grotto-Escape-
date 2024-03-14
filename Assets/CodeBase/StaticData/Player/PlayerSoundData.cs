@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CodeBase.StaticData.Player
 {
@@ -7,6 +8,7 @@ namespace CodeBase.StaticData.Player
     {
         public AudioClip ShotSound;
         public AudioClip JumpSound;
+        public AudioClip ExplosionSound;
 
         public AudioClip GetSound(PlayerSoundType soundType)
         {
@@ -16,9 +18,12 @@ namespace CodeBase.StaticData.Player
                     return JumpSound;
                 case PlayerSoundType.Shot:
                     return ShotSound;
+                case PlayerSoundType.Explosion:
+                    return ExplosionSound;
                 default:
-                    return null;
+                    throw new ArgumentException("Unknown sound type", nameof(soundType));
             }
         }
+        
     }
 }

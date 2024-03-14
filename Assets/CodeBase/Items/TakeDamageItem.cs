@@ -10,7 +10,7 @@ public class TakeDamageItem : MonoBehaviour
         if (playerLayer == (1 << other.gameObject.layer))
         {
             var player = other.GetComponent<IHealth>();
-            player.TakeDamage(player.MaxHP/8);
+            player.TakeDamage(player.MaxHP/16);
             Debug.Log(player.CurrentHP);
         }
 

@@ -3,6 +3,7 @@
     public enum PlayerSoundType
     {
         Shot,
-        Jump
+        Jump,
+        Explosion,
     }
 }

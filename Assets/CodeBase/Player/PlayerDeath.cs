@@ -1,6 +1,8 @@
 ﻿
  using System;
-using UnityEngine;
+ using CodeBase.Infrastructure.State;
+ using CodeBase.StaticData.Player;
+ using UnityEngine;
 
 namespace CodeBase.Player
 {
@@ -12,13 +14,22 @@ namespace CodeBase.Player
         private PlayerHealth _health;
         private PlayerMovement _playerMovement;
         private PlayerAnimator _animator;
+        private IGameStateMachine _gameStateMachine;
+        private PlayerSounds _sounds;
+
         private bool _isDead;
+
+        public void Construct(IGameStateMachine gameStateMachine)
+        {
+            _gameStateMachine = gameStateMachine;
+        }
 
         private void Awake()
         {
             _health = GetComponent<PlayerHealth>();
             _playerMovement = GetComponent<PlayerMovement>();
             _animator = GetComponent<PlayerAnimator>();
+            _sounds = GetComponent<PlayerSounds>();
         }
 
         private void Start() => 
@@ -34,10 +45,13 @@ namespace CodeBase.Player
         {
             _isDead = true;
             _animator.PlayDie();
+            _sounds.PlayOneSound(PlayerSoundType.Explosion);
             _playerMovement.enabled = false;
             var position = new Vector3(transform.position.x, transform.position.y +0.8f, transform.position.z);
             GameObject explossion = Instantiate(DeathExplossion, position, Quaternion.identity);
             Destroy(explossion, 1f);
+            
+            _gameStateMachine.Enter<BootstrapState>();
         }
     }
 }
