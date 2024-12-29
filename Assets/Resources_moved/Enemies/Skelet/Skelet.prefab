@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a640c0c0e6b0446db1ec30bedc177dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _patrolSound: 1
   _aggroSound: 2
   AudioSources: {fileID: 2145366347259108070}
   EnemySoundData: {fileID: 11400000, guid: 7d4daa84b314071408e0856708c787c0, type: 2}
@@ -183,7 +182,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.418
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -192,7 +191,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 35
+  MaxDistance: 27
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
