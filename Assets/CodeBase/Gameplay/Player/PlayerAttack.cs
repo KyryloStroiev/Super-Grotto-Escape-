@@ -12,22 +12,19 @@ namespace CodeBase.Player
         public float Damage { get; set; }
         
         public Transform shootPoint;
+
+        [SerializeField] private FlipDirectionPlayer _flip;
+        [SerializeField] private PlayerAnimator _animator;
+        [SerializeField] private PlayerSounds _playerSounds;
         
         private IInputService _inputService;
-        private FlipDirectionPlayer _flip;
-        private PlayerAnimator _animator;
         private IObjectPool _objectPool;
-        private PlayerSounds _playerSounds;
-        
+
         public void Construct(IInputService inputService, IObjectPool objectPool)
         {
             _inputService = inputService;
             _objectPool = objectPool;
             _inputService.Shoot += StartAttack;
-            _flip = GetComponent<FlipDirectionPlayer>();
-            _animator = GetComponent<PlayerAnimator>();
-            _playerSounds = GetComponent<PlayerSounds>();
-
         }
         private void StartAttack() => 
             _animator.PlayAttack();

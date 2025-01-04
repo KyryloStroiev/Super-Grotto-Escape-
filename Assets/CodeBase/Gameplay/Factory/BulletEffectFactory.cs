@@ -1,11 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CodeBase.Infrastructure.AssetManagement;
-using CodeBase.Infrastructure.Service.Input;
-using CodeBase.Infrastructure.Service.ObjectPool;
-using CodeBase.Infrastructure.Service.StaticDataService;
-using CodeBase.Logic;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.Infrastructure.Factory
 {
