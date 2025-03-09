@@ -66,7 +66,7 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "swappywrapper::@7e25bd1f32ce224db4e9",
-					"jsonFile" : "target-swappywrapper-RelWithDebInfo-7662faa759f06980a5e4.json",
+					"jsonFile" : "target-swappywrapper-RelWithDebInfo-b94fdd55758588b82029.json",
 					"name" : "swappywrapper",
 					"projectIndex" : 1
 				}
@@ -76,7 +76,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/src_Unity/RepozitorGITHub/Super-Grotto-Escape/.utmp/RelWithDebInfo/28141fa2/arm64-v8a",
+		"build" : "D:/src_Unity/RepozitorGITHub/Super-Grotto-Escape/.utmp/RelWithDebInfo/28141fa2/armeabi-v7a",
 		"source" : "D:/src_Unity/RepozitorGITHub/Super-Grotto-Escape/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp"
 	},
 	"version" : 

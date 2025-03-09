@@ -5,14 +5,14 @@
   ],
   "cleanCommandsComponents": [
     [
-      "D:\\Unity\\6000.0.32f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\SDK\\cmake\\3.22.1\\bin\\ninja.exe",
+      "D:\\Unity\\6000.0.34f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\SDK\\cmake\\3.22.1\\bin\\ninja.exe",
       "-C",
       "D:\\src_Unity\\RepozitorGITHub\\Super-Grotto-Escape\\.utmp\\RelWithDebInfo\\28141fa2\\arm64-v8a",
       "clean"
     ]
   ],
   "buildTargetsCommandComponents": [
-    "D:\\Unity\\6000.0.32f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\SDK\\cmake\\3.22.1\\bin\\ninja.exe",
+    "D:\\Unity\\6000.0.34f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\SDK\\cmake\\3.22.1\\bin\\ninja.exe",
     "-C",
     "D:\\src_Unity\\RepozitorGITHub\\Super-Grotto-Escape\\.utmp\\RelWithDebInfo\\28141fa2\\arm64-v8a",
     "{LIST_OF_TARGETS_TO_BUILD}"
@@ -28,8 +28,8 @@
   },
   "toolchains": {
     "toolchain": {
-      "cCompilerExecutable": "D:\\Unity\\6000.0.32f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
-      "cppCompilerExecutable": "D:\\Unity\\6000.0.32f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+      "cCompilerExecutable": "D:\\Unity\\6000.0.34f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "D:\\Unity\\6000.0.34f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
     }
   },
   "cFileExtensions": [],

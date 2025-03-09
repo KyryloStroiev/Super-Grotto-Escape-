@@ -1,5 +1,4 @@
 ﻿
- using System;
  using CodeBase.Infrastructure.State;
  using CodeBase.StaticData.Player;
  using UnityEngine;
@@ -30,6 +29,7 @@ namespace CodeBase.Player
             _playerMovement = GetComponent<PlayerMovement>();
             _animator = GetComponent<PlayerAnimator>();
             _sounds = GetComponent<PlayerSounds>();
+            Debug.Log(_gameStateMachine);
         }
 
         private void Start() => 

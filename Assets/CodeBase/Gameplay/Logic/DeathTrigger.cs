@@ -10,6 +10,7 @@ namespace CodeBase.Logic
 
             if (health != null)
             {
+                Debug.Log("De   a");
                 health.TakeDamage(health.MaxHP);
             }
         }

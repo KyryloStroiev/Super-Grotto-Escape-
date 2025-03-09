@@ -22,7 +22,7 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IMenuService _menuService;
         private IGameStateMachine _gameStateMachine;
 
-        public PlayerFactory(IAssetProvider assets, IStaticDataService staticData, IInputService inputService, IObjectPool objectPool, IMenuService menuService) :
+        public PlayerFactory(IAssetProvider assets, IStaticDataService staticData, IInputService inputService, IObjectPool objectPool, IMenuService menuService, IGameStateMachine gameStateMachine) :
             base(assets, staticData, inputService, objectPool, menuService)
         {
             _assets = assets;
@@ -30,11 +30,9 @@ namespace CodeBase.Infrastructure.Factory
             _inputService = inputService;
             _objectPool = objectPool;
             _menuService = menuService;
-        }
-
-        public void Construct(IGameStateMachine gameStateMachine) => 
             _gameStateMachine = gameStateMachine;
-
+        }
+        
         public async Task<GameObject> CreateHero(Vector3 at)
         {
             GameObject prefab = await _assets.Load<GameObject>(AssetsAdress.Player);

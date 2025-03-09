@@ -5,6 +5,7 @@ using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Service.Input;
 using CodeBase.Infrastructure.Service.ObjectPool;
 using CodeBase.Infrastructure.Service.StaticDataService;
+using CodeBase.Infrastructure.State;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.StaticData.Enemy;
 using CodeBase.UI.Service.Menu;
